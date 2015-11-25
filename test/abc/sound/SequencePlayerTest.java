@@ -2,6 +2,7 @@ package abc.sound;
 
 import static org.junit.Assert.*;
 
+
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
 
@@ -9,7 +10,7 @@ import org.junit.Test;
 
 public class SequencePlayerTest {
 
-    // TODO: warmup #2
+    // Each test will go through and play each song. 
     
     @Test
     public void testPiece1() {
