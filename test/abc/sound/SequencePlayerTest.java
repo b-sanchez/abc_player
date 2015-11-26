@@ -87,10 +87,10 @@ public class SequencePlayerTest {
             player.addNote(new Pitch('E').transpose(Pitch.OCTAVE).toMidiNote(), 0, 6);
             player.addNote(new Pitch('F').transpose(1).toMidiNote(), 6, 6);
             player.addNote(new Pitch('E').transpose(Pitch.OCTAVE).toMidiNote(), 6, 6);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 12, 6); //REST
+            player.addNote(0, 12, 6);
             player.addNote(new Pitch('F').transpose(1).toMidiNote(), 18, 6);
             player.addNote(new Pitch('E').transpose(Pitch.OCTAVE).toMidiNote(), 18, 6);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 24, 6); //REST
+            player.addNote(0, 24, 6);
             player.addNote(new Pitch('F').transpose(1).toMidiNote(), 30, 6);
             player.addNote(new Pitch('C').transpose(Pitch.OCTAVE).toMidiNote(), 30, 6);
             player.addNote(new Pitch('E').transpose(Pitch.OCTAVE).toMidiNote(), 36, 12);
@@ -98,12 +98,12 @@ public class SequencePlayerTest {
             player.addNote(new Pitch('G').toMidiNote(), 48, 12);
             player.addNote(new Pitch('B').toMidiNote(), 48, 12);
             player.addNote(new Pitch('G').transpose(Pitch.OCTAVE).toMidiNote(), 48, 12);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 60, 12); //REST
+            player.addNote(0, 60, 12); 
             player.addNote(new Pitch('G').toMidiNote(), 72, 12);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 84, 12); //REST
+            player.addNote(0, 84, 12);
             player.addNote(new Pitch('C').transpose(Pitch.OCTAVE).toMidiNote(), 96, 18);
             player.addNote(new Pitch('G').toMidiNote(), 114, 6);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 120, 12); //REST
+            player.addNote(0, 120, 12);
             player.addNote(new Pitch('E').toMidiNote(), 132, 12);
             player.addNote(new Pitch('E').toMidiNote(), 144, 6);
             player.addNote(new Pitch('A').toMidiNote(), 150, 12);
@@ -116,12 +116,12 @@ public class SequencePlayerTest {
             player.addNote(new Pitch('A').transpose(Pitch.OCTAVE).toMidiNote(), 216, 12);
             player.addNote(new Pitch('F').transpose(Pitch.OCTAVE).toMidiNote(), 228, 6);
             player.addNote(new Pitch('G').transpose(Pitch.OCTAVE).toMidiNote(), 234, 6);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 240, 6); //REST
+            player.addNote(0, 240, 6);
             player.addNote(new Pitch('E').transpose(Pitch.OCTAVE).toMidiNote(), 246, 12);
             player.addNote(new Pitch('C').transpose(Pitch.OCTAVE).toMidiNote(), 258, 6);
             player.addNote(new Pitch('D').transpose(Pitch.OCTAVE).toMidiNote(), 264, 6);
             player.addNote(new Pitch('B').toMidiNote(), 270, 9);
-            player.addNote(new Pitch('C').transpose(60).toMidiNote(), 279, 9); //REST
+            player.addNote(0, 279, 9);
             
             
             System.out.println(player);
