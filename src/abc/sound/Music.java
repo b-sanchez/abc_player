@@ -1,8 +1,20 @@
 package abc.sound;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Music {
+    
+    //Datatype Definition
+    // Music = List<Measure>
+    // Measure = List<Chord>
+    // Chord = List<Single>
+    
+    private final List<Measure> measures;
+    
+    public Music(List<Measure> measures){
+        this.measures = measures;
+    }
     
     public int getDuration() {
         // TODO Auto-generated method stub
@@ -10,8 +22,7 @@ public class Music {
     }
     
     public List<Measure> getMeasures(){
-        // TODO Auto-generated method stub
-        return null;
+        return Collections.unmodifiableList(this.measures);
     }
     
     public Music transpose() {

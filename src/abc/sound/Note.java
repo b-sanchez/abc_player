@@ -2,14 +2,17 @@ package abc.sound;
 
 public class Note implements Single {
     
+    private final Pitch pitch;
+    private final int duration;
+    
     public Note(Pitch pitch, int duration){
-        
+        this.pitch = pitch;
+        this.duration = duration;
     }
 
     @Override
     public String getType() {
-        // TODO Auto-generated method stub
-        return null;
+        return "note";
     }
 
     @Override
@@ -20,14 +23,12 @@ public class Note implements Single {
 
     @Override
     public Pitch getPitch() {
-        // TODO Auto-generated method stub
-        return null;
+        return this.pitch;
     }
 
     @Override
     public int getDuration() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.duration;
     }
     
     @Override

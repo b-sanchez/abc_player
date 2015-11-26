@@ -1,18 +1,23 @@
 package abc.sound;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Measure {
-
     
+    private final List<Chord> chords;
+    
+    public Measure(List<Chord> chords){
+        this.chords = chords;
+    }
+
     public int getDuration() {
         // TODO Auto-generated method stub
         return 0;
     }
     
     public List<Chord> getChords(){
-        // TODO Auto-generated method stub
-        return null;
+        return Collections.unmodifiableList(this.chords);
     }
     
     public Measure transpose() {

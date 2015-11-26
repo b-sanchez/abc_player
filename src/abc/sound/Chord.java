@@ -1,9 +1,15 @@
 package abc.sound;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Chord {
-
+    
+    private final List<Single> singles;
+    
+    public Chord(List<Single> singles){
+        this.singles = singles;
+    }
     
     public int getDuration() {
         // TODO Auto-generated method stub
@@ -11,8 +17,7 @@ public class Chord {
     }
     
     public List<Single> getSingles(){
-        // TODO Auto-generated method stub
-        return null;
+        return Collections.unmodifiableList(this.singles);
     }
     
     public Chord transpose() {

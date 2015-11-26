@@ -1,15 +1,16 @@
 package abc.sound;
 
 public class Rest implements Single {
-
-public Rest(int duration){
-        
+    
+    private final int duration;
+    
+    public Rest(int duration){
+        this.duration = duration;
     }
 
     @Override
     public String getType() {
-        // TODO Auto-generated method stub
-        return null;
+        return "rest";
     }
 
     @Override
@@ -26,8 +27,7 @@ public Rest(int duration){
 
     @Override
     public int getDuration() {
-        // TODO Auto-generated method stub
-        return 0;
+        return this.duration;
     }
     
     @Override
