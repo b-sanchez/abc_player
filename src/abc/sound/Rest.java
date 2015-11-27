@@ -14,9 +14,8 @@ public class Rest implements Single {
     }
 
     @Override
-    public Single transpose() {
-        // TODO Auto-generated method stub
-        return null;
+    public Single transpose(int semitonesUp) {
+        return this;
     }
 
     @Override

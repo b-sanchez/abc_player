@@ -16,9 +16,8 @@ public class Note implements Single {
     }
 
     @Override
-    public Single transpose() {
-        // TODO Auto-generated method stub
-        return null;
+    public Single transpose(int semitonesUp) {
+        return new Note(this.pitch.transpose(semitonesUp), this.duration);
     }
 
     @Override
