@@ -5,6 +5,11 @@ public class Note implements Single {
     private final Pitch pitch;
     private final int duration;
     
+    /**
+     * Constructor for a Single that is a note
+     * @param pitch: a Pitch object representing the Single's pitch
+     * @param duration: an integer length for the note to be played
+     */
     public Note(Pitch pitch, int duration){
         this.pitch = pitch;
         this.duration = duration;

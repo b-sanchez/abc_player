@@ -4,6 +4,10 @@ public class Rest implements Single {
     
     private final int duration;
     
+    /**
+     * Constructor for a Single that is a rest
+     * @param duration: an integer length for the rest to be held
+     */
     public Rest(int duration){
         this.duration = duration;
     }

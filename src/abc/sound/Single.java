@@ -3,25 +3,6 @@ package abc.sound;
 public interface Single {
     
     /**
-     * Constructor for a Single that is a note
-     * @param pitch: a Pitch object representing the Single's pitch
-     * @param duration: an integer length for the note to be played
-     * @return a Note object with given pitch and duration
-     */
-    public static Single note(Pitch pitch, int duration){
-        return new Note(pitch, duration);
-    }
-    
-    /**
-     * Constructor for a Single that is a rest
-     * @param duration: an integer length for the rest to be held
-     * @return a Rest object with given duration
-     */
-    public static Single rest(int duration){
-        return new Rest(duration);
-    }
-    
-    /**
      * Returns whether Single object is a "note" or a "rest"
      * @return "note" or "rest", depending on type of Single object
      */

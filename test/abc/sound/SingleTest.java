@@ -9,5 +9,10 @@ public class SingleTest {
     //TESTING STRATEGY:
     //Types to test: Note and Rest
     //Methods to test: getType, getPitch, getDuration, transpose
-
+    
+    @Test
+    public void testGetTypeNote(){
+        
+    }
+    
 }
