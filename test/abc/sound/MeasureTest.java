@@ -7,9 +7,9 @@ import org.junit.Test;
 public class MeasureTest {
 
     //TESTING STRATEGY:
-    //Methods to test: getChords, getDuration, transpose, toString
+    //Methods to test: getSingles, getDuration, transpose, toString
         
-    //getChords():
+    //getSingles():
     //-1, 2+ chords
     //-Chords with just rests, just notes, both
     
@@ -24,4 +24,9 @@ public class MeasureTest {
     //toString():
     //-1, 2+ chords
     //-chords with just rests, just notes, both
+    
+    @Test
+    public void testGetSingles() {
+        //Measure measure = new Measure();
+    }
 }

@@ -1,11 +1,11 @@
 package abc.sound;
 
 import java.util.Collections;
-import java.util.List;
+import java.util.Set;
 
 public class Chord implements Single {
     
-    private final List<Note> notes;
+    private final Set<Note> notes;
     
     //Rep Invariant:
     //-this.getDuration() > 0
@@ -18,7 +18,7 @@ public class Chord implements Single {
      * Constructor for Chord object
      * @param notes: List of Note objects to be played in the Chord
      */
-    public Chord(List<Note> notes){
+    public Chord(Set<Note> notes){
         this.notes = notes;
     }
     
@@ -35,8 +35,8 @@ public class Chord implements Single {
      * Returns the list of Notes to be played in the chord
      * @return List of Notes in the chord
      */
-    public List<Note> getSingles(){
-        return Collections.unmodifiableList(this.notes);
+    public Set<Note> getSingles(){
+        return Collections.unmodifiableSet(this.notes);
     }
     
     /**

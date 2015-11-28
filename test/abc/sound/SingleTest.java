@@ -2,9 +2,8 @@ package abc.sound;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class SingleTest {
     
     //getDuration():
     //-Rest/Note/Chord (duration must be > 0 as part of the Rep Invariant)
-    //for 
+    //for Chord, notes of different duration/same duration
     
     //transpose():
     //-Note/Rest/Chord
@@ -47,7 +46,7 @@ public class SingleTest {
     //getType: Chord
     @Test
     public void testGetTypeChord(){
-        List<Note> notes = new ArrayList<>();
+        Set<Note> notes = new HashSet<>();
         notes.add(new Note(new Pitch('C') ,10));
         Single chord = new Chord(notes);
         assertEquals(chord.getType(), "chord");
@@ -65,6 +64,26 @@ public class SingleTest {
     public void testGetDurationRest(){
         Single rest = new Rest(10);
         assertEquals(rest.getDuration(), 10);
+    }
+    
+    //getDuration: Chord, Notes all same duration
+    @Test
+    public void testGetDurationChordAllSame(){
+        Set<Note> notes = new HashSet<>();
+        notes.add(new Note(new Pitch('C') ,10));
+        notes.add(new Note(new Pitch('E') ,10));
+        Single chord = new Chord(notes);
+        assertEquals(chord.getDuration(), 10);
+    }
+    
+    //getDuration: Chord, Notes different durations
+    @Test
+    public void testGetDurationChordDifferent(){
+        Set<Note> notes = new HashSet<>();
+        notes.add(new Note(new Pitch('C') ,10));
+        notes.add(new Note(new Pitch('E') ,15));
+        Single chord = new Chord(notes);
+        assertEquals(chord.getDuration(), 15);
     }
     
     //transpose: Rest
@@ -93,5 +112,44 @@ public class SingleTest {
     public void testTransposeNoteDownWithinOne(){
         Single note = new Note(new Pitch('C') ,10);
         assertEquals(note.transpose(-Pitch.OCTAVE), new Note(new Pitch('C').transpose(-Pitch.OCTAVE) , 10));
+    }
+    
+    //transpose: Chord, within one octave, semitonesUp +
+    @Test
+    public void testTransposeChordUpWithinOne(){
+        Set<Note> notes = new HashSet<>();
+        notes.add(new Note(new Pitch('C') ,10));
+        notes.add(new Note(new Pitch('E') ,15));
+        Single chord = new Chord(notes);
+        assertEquals(chord.transpose(2), new Chord(transposeSetOfNotes(notes, 2)));
+    }
+    
+    //transpose: Note, within two octaves, semitonesUp +
+    @Test
+    public void testTransposeChordUpWithinTwo(){
+        Set<Note> notes = new HashSet<>();
+        notes.add(new Note(new Pitch('C') ,10));
+        notes.add(new Note(new Pitch('E') ,15));
+        Single chord = new Chord(notes);
+        assertEquals(chord.transpose(Pitch.OCTAVE+2), new Chord(transposeSetOfNotes(notes, Pitch.OCTAVE+2)));
+    }
+    
+    //transpose: Note, within one octave, semitonesUp -
+    @Test
+    public void testTransposeChordDownWithinOne(){
+        Set<Note> notes = new HashSet<>();
+        notes.add(new Note(new Pitch('C') ,10));
+        notes.add(new Note(new Pitch('E') ,15));
+        Single chord = new Chord(notes);
+        assertEquals(chord.transpose(-3), new Chord(transposeSetOfNotes(notes, -3)));
+    }
+    
+    //helper method, transposes a list of notes up the amount of semitones indicated
+    public static Set<Note> transposeSetOfNotes(Set<Note> notes, int semitonesUp) {
+        Set<Note> transposedNotes = new HashSet<Note>();
+        for(Note note: notes) {
+            transposedNotes.add((Note) note.transpose(semitonesUp));
+        }
+        return transposedNotes;
     }
 }
