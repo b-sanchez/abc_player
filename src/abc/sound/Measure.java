@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Measure {
     
-    private final List<Chord> chords;
+    private final List<Single> singles;
     
     //Rep Invariant:
     //-this.getDuration() > 0
@@ -16,10 +16,10 @@ public class Measure {
     
     /**
      * Constructor for Measure object
-     * @param chords: List of Chord objects to be played in the Measure
+     * @param singles: List of Single objects to be played in the Measure
      */
-    public Measure(List<Chord> chords){
-        this.chords = chords;
+    public Measure(List<Single> singles){
+        this.singles = singles;
     }
     
     /**
@@ -32,11 +32,11 @@ public class Measure {
     }
     
     /**
-     * Returns the list of Chords to be played in the measure
-     * @return List of Chords in the measure
+     * Returns the list of Singles to be played in the measure
+     * @return List of Singles in the measure
      */
-    public List<Chord> getChords(){
-        return Collections.unmodifiableList(this.chords);
+    public List<Single> getSingles(){
+        return Collections.unmodifiableList(this.singles);
     }
     
     /**
@@ -74,7 +74,8 @@ public class Measure {
      * @param that: Object to compare this Measure with
      * @return true if two Measure objects are identical 
      */
-    public boolean equals(Object that) {
+    @Override
+    public boolean equals(Object obj) {
         // TODO Auto-generated method stub
         return false;
     }

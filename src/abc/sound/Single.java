@@ -16,22 +16,8 @@ public interface Single {
     public Single transpose(int semitonesUp);
     
     /**
-     * Returns the pitch of the Single, only if it is a Note
-     * @return pitch of the Single object
-     */
-    public Pitch getPitch();
-    
-    /**
      * Returns the integer duration of the Single
      * @return duration of the Single object
      */
     public int getDuration();
-    
-    /**
-     * Determines equality of two Single objects, according to music theory
-     * @param that: Object to compare this Measure with
-     * @return true if two Single objects are identical 
-     */
-    public boolean equals();
-    
 }

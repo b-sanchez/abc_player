@@ -33,7 +33,6 @@ public class Note implements Single {
         return new Note(this.pitch.transpose(semitonesUp), this.duration);
     }
 
-    @Override
     public Pitch getPitch() {
         return this.pitch;
     }
@@ -56,7 +55,7 @@ public class Note implements Single {
     }
     
     @Override
-    public boolean equals() {
+    public boolean equals(Object obj) {
         // TODO Auto-generated method stub
         return false;
     }

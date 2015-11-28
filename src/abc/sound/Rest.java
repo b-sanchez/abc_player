@@ -31,12 +31,6 @@ public class Rest implements Single {
     }
 
     @Override
-    public Pitch getPitch() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
     public int getDuration() {
         return this.duration;
     }
@@ -54,7 +48,7 @@ public class Rest implements Single {
     }
     
     @Override
-    public boolean equals() {
+    public boolean equals(Object obj) {
         // TODO Auto-generated method stub
         return false;
     }

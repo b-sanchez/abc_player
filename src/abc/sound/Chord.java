@@ -3,9 +3,9 @@ package abc.sound;
 import java.util.Collections;
 import java.util.List;
 
-public class Chord {
+public class Chord implements Single {
     
-    private final List<Single> singles;
+    private final List<Note> notes;
     
     //Rep Invariant:
     //-this.getDuration() > 0
@@ -16,10 +16,10 @@ public class Chord {
     
     /**
      * Constructor for Chord object
-     * @param singles: List of Single objects to be played in the Chord
+     * @param notes: List of Note objects to be played in the Chord
      */
-    public Chord(List<Single> singles){
-        this.singles = singles;
+    public Chord(List<Note> notes){
+        this.notes = notes;
     }
     
     /**
@@ -32,11 +32,11 @@ public class Chord {
     }
     
     /**
-     * Returns the list of Singles (Notes or Rests) to be played in the chord
-     * @return List of Singles in the chord
+     * Returns the list of Notes to be played in the chord
+     * @return List of Notes in the chord
      */
-    public List<Single> getSingles(){
-        return Collections.unmodifiableList(this.singles);
+    public List<Note> getSingles(){
+        return Collections.unmodifiableList(this.notes);
     }
     
     /**
@@ -73,8 +73,15 @@ public class Chord {
      * @param that: Object to compare this Chord with
      * @return true if two Chord objects are identical 
      */
-    public boolean equals(Object that) {
+    @Override
+    public boolean equals(Object obj) {
         // TODO Auto-generated method stub
         return false;
     }
+
+    @Override
+    public String getType() {
+        return "chord";
+    }
+
 }
