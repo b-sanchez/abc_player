@@ -3,7 +3,7 @@
  *       java -jar ../../../lib/antlr.jar *.g4
  * then Refresh in Eclipse.
  */
-grammar Xyz;
+grammar NoteGrammar;
 import Configuration;
 
 root: NUMBER EOF;
