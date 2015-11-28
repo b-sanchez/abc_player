@@ -12,6 +12,13 @@ public class Music {
     // Chord = List<Single>
     
     private final List<Measure> measures;
+
+    //Rep Invariant:
+    //-this.getDuration() > 0
+    //Abstraction Function AF(value):
+    //-
+    //Safety from Rep Exposure:
+    //-
     
     /**
      * Constructor for Music object

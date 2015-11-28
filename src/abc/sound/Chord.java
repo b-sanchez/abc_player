@@ -7,6 +7,13 @@ public class Chord {
     
     private final List<Single> singles;
     
+    //Rep Invariant:
+    //-this.getDuration() > 0
+    //Abstraction Function AF(value):
+    //-
+    //Safety from Rep Exposure:
+    //-
+    
     /**
      * Constructor for Chord object
      * @param singles: List of Single objects to be played in the Chord

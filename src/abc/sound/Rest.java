@@ -3,6 +3,14 @@ package abc.sound;
 public class Rest implements Single {
     
     private final int duration;
+ 
+    //Rep Invariant:
+    //-Rest does not have a Pitch
+    //-this.duration > 0
+    //Abstraction Function AF(value):
+    //-
+    //Safety from Rep Exposure:
+    //-
     
     /**
      * Constructor for a Single that is a rest

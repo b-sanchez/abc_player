@@ -7,6 +7,13 @@ public class Measure {
     
     private final List<Chord> chords;
     
+    //Rep Invariant:
+    //-this.getDuration() > 0
+    //Abstraction Function AF(value):
+    //-
+    //Safety from Rep Exposure:
+    //-
+    
     /**
      * Constructor for Measure object
      * @param chords: List of Chord objects to be played in the Measure

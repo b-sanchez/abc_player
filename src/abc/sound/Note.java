@@ -5,6 +5,14 @@ public class Note implements Single {
     private final Pitch pitch;
     private final int duration;
     
+    
+    //Rep Invariant:
+    //-this.duration > 0
+    //Abstraction Function AF(value):
+    //-
+    //Safety from Rep Exposure:
+    //-
+    
     /**
      * Constructor for a Single that is a note
      * @param pitch: a Pitch object representing the Single's pitch
