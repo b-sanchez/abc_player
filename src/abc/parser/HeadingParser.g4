@@ -11,13 +11,13 @@ SIGNATURE: [A-G]('^' | '_')? m?
 ANYTHING: .+
 NEWLINE: \n | \r\n
 rational: NUMBER '/' NUMBER;
-duration: RATIONAL | NUMBER;
+duration: rational | NUMBER;
 x: X':'NUMBER NEWLINE
 t: T':'ANYTHING NEWLINE
 c: C':'ANYTHING NEWLINE
 v: V':'ANYTHING NEWLINE
-m: M':'RATIONAL NEWLINE
-l: L':'DURATION NEWLINE
-q: Q':'DURATION'='NUMBER NEWLINE
+m: M':'rational NEWLINE
+l: L':'duration NEWLINE
+q: Q':'duration'='NUMBER NEWLINE
 k: K':'SIGNATURE NEWLINE
 root: X T C? V* M? L? Q? K EOF;
