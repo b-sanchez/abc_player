@@ -31,19 +31,19 @@ public class ChordTest {
     //-1, 2+ singles
     //-just rests, just notes, both
     
-    @Test
-    public void testGetSinglesOneNote() {
-        List<Single> notes = new ArrayList<>();
-        notes.add(new Note(new Pitch('C'), 10));
-        Chord chord = new Chord(notes);
-        assertEquals(chord.getSingles(), Arrays.asList(new Note(new Pitch('C'), 10)));
-    }
-    
-    @Test
-    public void testGetSinglesOneRest() {
-        List<Single> notes = new ArrayList<>();
-        notes.add(new Note(new Pitch('C'), 10));
-        Chord chord = new Chord(notes);
-        assertEquals(chord.getSingles(), Arrays.asList(new Note(new Pitch('C'), 10)));
-    }
+//    @Test
+//    public void testGetSinglesOneNote() {
+//        List<Single> notes = new ArrayList<>();
+//        notes.add(new Note(new Pitch('C'), 10));
+//        Chord chord = new Chord(notes);
+//        assertEquals(chord.getSingles(), Arrays.asList(new Note(new Pitch('C'), 10)));
+//    }
+//    
+//    @Test
+//    public void testGetSinglesOneRest() {
+//        List<Single> notes = new ArrayList<>();
+//        notes.add(new Note(new Pitch('C'), 10));
+//        Chord chord = new Chord(notes);
+//        assertEquals(chord.getSingles(), Arrays.asList(new Note(new Pitch('C'), 10)));
+//    }
 }
