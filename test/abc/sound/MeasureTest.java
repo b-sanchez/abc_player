@@ -7,6 +7,21 @@ import org.junit.Test;
 public class MeasureTest {
 
     //TESTING STRATEGY:
-    //Methods to test: getType, getChords, getDuration, transpose, toString
+    //Methods to test: getChords, getDuration, transpose, toString
+        
+    //getChords():
+    //-1, 2+ chords
+    //-Chords with just rests, just notes, both
     
+    //getDuration():
+    //-1, 2+ chords
+    //-(duration must be > 0 as part of the Rep Invariant)
+    
+    //transpose():
+    //-Within 0, 1, 2+ octaves
+    //-semitonesUp = negative/positive
+    
+    //toString():
+    //-1, 2+ chords
+    //-chords with just rests, just notes, both
 }
