@@ -44,20 +44,23 @@ public class Note implements Single {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        //Just return the String of the pitch of the note
+        return this.pitch.toString();
     }
     
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 17;
     }
     
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return false;
+        if(obj instanceof Note){
+            Note that = (Note) obj;
+            //A note is equal to another note if they have the same pitch and same duration
+            return (that.getPitch().equals(this.getPitch())) && (that.getDuration() == this.getDuration());
+         }
+         return false;
     }
     
     

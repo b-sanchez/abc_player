@@ -55,8 +55,14 @@ public class Measure {
      */
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        //We will probably need to discuss this
+        StringBuilder measure = new StringBuilder();
+        measure.append("| ");
+        for(Single single : singles){
+            measure.append(single.toString());
+            measure.append(" ");
+        }
+        return measure.toString();
     }
     
     /**
@@ -65,8 +71,7 @@ public class Measure {
      */
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 17;
     }
     
     /**
@@ -76,8 +81,22 @@ public class Measure {
      */
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
+        if(obj instanceof Measure){
+            Measure that = (Measure) obj;
+            //Have to be of the same size
+            if(that.getSingles().size() != that.getSingles().size()){
+                return false;
+            }
+            //Check for both order and that everything inside is equal
+            for(int i = 0; i <= that.getSingles().size(); i++){
+                if(!(this.getSingles().get(i).equals(that.getSingles().get(i)))){
+                    return false;
+                }
+            }
+            return true;
+        }
         return false;
     }
+    
     
 }

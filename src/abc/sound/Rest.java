@@ -37,20 +37,22 @@ public class Rest implements Single {
     
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        return "z";
     }
     
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 17;
     }
     
     @Override
     public boolean equals(Object obj) {
-        // TODO Auto-generated method stub
-        return false;
+        //Check if durations are the same for equality
+        if(obj instanceof Rest){
+            Rest that = (Rest) obj;
+            return that.getDuration() == this.getDuration();
+         }
+         return false;
     }
     
 }

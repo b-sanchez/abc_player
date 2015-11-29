@@ -61,8 +61,12 @@ public class Music {
      */
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return null;
+        StringBuilder piece = new StringBuilder();
+        for(Measure measure: measures){
+            piece.append(measure.toString());
+        }
+        piece.append("|]");
+        return piece.toString();
     }
     
     /**
@@ -71,8 +75,7 @@ public class Music {
      */
     @Override
     public int hashCode() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 17;
     }
     
     /**
@@ -80,8 +83,21 @@ public class Music {
      * @param that: Object to compare this Music with
      * @return true if two Music objects are identical 
      */
-    public boolean equals() {
-        // TODO Auto-generated method stub
+    public boolean equals(Object obj) {
+        if(obj instanceof Music){
+            Music that = (Music) obj;
+            //Have to have same number of measures
+            if(that.getMeasures().size() != that.getMeasures().size()){
+                return false;
+            }
+            //Check for both order and that all measures inside inside are equal
+            for(int i = 0; i <= that.getMeasures().size(); i++){
+                if(!(this.getMeasures().get(i).equals(that.getMeasures().get(i)))){
+                    return false;
+                }
+            }
+            return true;
+        }
         return false;
     }
 

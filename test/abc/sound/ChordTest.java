@@ -21,7 +21,7 @@ public class ChordTest {
         Set<Note> notes = new HashSet<>();
         notes.add(new Note(new Pitch('C'), 10));
         Chord chord = new Chord(notes);
-        assertEquals(chord.getSingles(), new HashSet<>(Arrays.asList(new Note(new Pitch('C'), 10))));
+        assertEquals(chord.getNotes(), new HashSet<>(Arrays.asList(new Note(new Pitch('C'), 10))));
     }
     
     @Test
@@ -31,6 +31,6 @@ public class ChordTest {
         notes.add(new Note(new Pitch('E'), 10));
         notes.add(new Note(new Pitch('G'), 10));
         Chord chord = new Chord(notes);
-        assertEquals(chord.getSingles(), new HashSet<>(Arrays.asList(new Note(new Pitch('C'), 10), new Note(new Pitch('E'), 10), new Note(new Pitch('G'), 10))));
+        assertEquals(chord.getNotes(), new HashSet<>(Arrays.asList(new Note(new Pitch('C'), 10), new Note(new Pitch('E'), 10), new Note(new Pitch('G'), 10))));
     }
 }
