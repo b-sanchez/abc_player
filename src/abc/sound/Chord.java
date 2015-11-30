@@ -28,8 +28,13 @@ public class Chord implements Single {
     
     @Override
     public int getDuration() {
-        // TODO Auto-generated method stub
-        return 0;
+        int longestDuration = 0;
+        for (Note note: this.notes){
+            if (note.getDuration() > longestDuration){
+                longestDuration = note.getDuration();
+            }
+        }
+        return longestDuration;
     }
     
     /**

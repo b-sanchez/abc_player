@@ -36,8 +36,11 @@ public class Music {
      * @return int duration of piece
      */
     public int getDuration() {
-        // TODO Auto-generated method stub
-        return 0;
+        int duration = 0;
+        for (Single single: this.singles){
+            duration += single.getDuration();
+        }
+        return duration;
     }
     
     /**
