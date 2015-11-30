@@ -6,5 +6,24 @@
 grammar NoteGrammar;
 import Configuration;
 
-root: NUMBER EOF;
-NUMBER: [0-9]+;
+NUM: [0-9]+;
+OPENR: '|'':';
+CLOSER: ':''|';
+BAR: '|';
+ENDMAJOR: '[''|' | '|''|' | '|'']';
+ENDING: '['NUM;
+ANYTHING: .+;
+NEWLINE: \n | \r\n;
+duration: NUM? '/'? NUM?;
+pitch: ['=''_''^']*[a-gA-G][','''']*;
+rest: 'z'duration;
+note: pitch duration;
+chord: '[' note+ ']';
+tuplet: '(' NUM note+;
+single: chord|note|rest|tuplet;
+repeatsec: [OPENR ENDMAJOR]? [single ENDING]+ CLOSER ENDING?;
+section: [single repeatsec]+ NEWLINE;
+voice: 'V'':' ANYTHING NEWLINE;
+root: (voice? section)+ EOF;
+
+
