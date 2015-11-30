@@ -1,5 +1,10 @@
 package abc.sound;
 
+import java.io.IOException;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
+
 public class Note implements Single {
     
     private final Pitch pitch;
@@ -63,6 +68,27 @@ public class Note implements Single {
          return false;
     }
     
+    @Override
+    public void play(){
+        try {
+            SequencePlayer player = new SequencePlayer(140, 12);
+    
+        System.out.println(player);
+
+        // play!
+        player.play();
+        
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        } catch (MidiUnavailableException mue) {
+            mue.printStackTrace();
+        } catch (InvalidMidiDataException imde) {
+            imde.printStackTrace();
+        }
+    }
     
 
 }

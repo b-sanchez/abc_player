@@ -1,7 +1,11 @@
 package abc.sound;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
 
 public class Chord implements Single {
     
@@ -77,6 +81,28 @@ public class Chord implements Single {
     @Override
     public String getType() {
         return "chord";
+    }
+    
+    @Override
+    public void play(){
+        try {
+            SequencePlayer player = new SequencePlayer(140, 12);
+    
+        System.out.println(player);
+
+        // play!
+        player.play();
+        
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        } catch (MidiUnavailableException mue) {
+            mue.printStackTrace();
+        } catch (InvalidMidiDataException imde) {
+            imde.printStackTrace();
+        }
     }
 
 }

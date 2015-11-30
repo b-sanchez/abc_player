@@ -1,8 +1,12 @@
 package abc.sound;
 
+import java.io.IOException;
 import java.util.Collections;
 
 import java.util.List;
+
+import javax.sound.midi.InvalidMidiDataException;
+import javax.sound.midi.MidiUnavailableException;
 
 public class Music {
     
@@ -62,7 +66,7 @@ public class Music {
     public String toString() {
         StringBuilder piece = new StringBuilder();
         for(Single single: singles){
-            piece.append(singles.toString());
+            piece.append(single.toString());
         }
         piece.append("|]");
         return piece.toString();
@@ -99,5 +103,32 @@ public class Music {
         }
         return false;
     }
+    
+    /**
+     * Plays the Music piece.
+     * addNote(base, tick, duration) schedules a note with pitch value 'base'
+     * starting at 'tick' to be played for 'duration' number of ticks. For example,
+     * addNote(new Pitch('C').toMidiNote(), 10, 1) plays the middle C at
+     * time step 10 for half the duration of a beat.
+     */
+    public void play(){
+        try {
+            SequencePlayer player = new SequencePlayer(140, 12);
+    
+        System.out.println(player);
 
+        // play!
+        player.play();
+        
+        try {
+            System.in.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        } catch (MidiUnavailableException mue) {
+            mue.printStackTrace();
+        } catch (InvalidMidiDataException imde) {
+            imde.printStackTrace();
+        }
+    }
 }
