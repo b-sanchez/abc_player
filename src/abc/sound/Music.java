@@ -7,11 +7,10 @@ import java.util.List;
 public class Music {
     
     //Datatype Definition
-    // Music = List<Measure>
-    // Measure = List<Chord>
-    // Chord = List<Single>
+    // Music = List<Singles>
+
     
-    private final List<Measure> measures;
+    private final List<Single> singles;
 
     //Rep Invariant:
     //-this.getDuration() > 0
@@ -24,8 +23,8 @@ public class Music {
      * Constructor for Music object
      * @param measures: List of Measure objects to be played in the Music
      */
-    public Music(List<Measure> measures){
-        this.measures = measures;
+    public Music(List<Single> singles){
+        this.singles = singles;
     }
     
     /**
@@ -41,8 +40,8 @@ public class Music {
      * Returns the list of measures to be played in the measure
      * @return List of measures in the Music object
      */
-    public List<Measure> getMeasures(){
-        return Collections.unmodifiableList(this.measures);
+    public List<Single> getSingles(){
+        return Collections.unmodifiableList(this.singles);
     }
     
     /**
@@ -62,8 +61,8 @@ public class Music {
     @Override
     public String toString() {
         StringBuilder piece = new StringBuilder();
-        for(Measure measure: measures){
-            piece.append(measure.toString());
+        for(Single single: singles){
+            piece.append(singles.toString());
         }
         piece.append("|]");
         return piece.toString();
@@ -87,12 +86,12 @@ public class Music {
         if(obj instanceof Music){
             Music that = (Music) obj;
             //Have to have same number of measures
-            if(that.getMeasures().size() != that.getMeasures().size()){
+            if(that.getSingles().size() != that.getSingles().size()){
                 return false;
             }
             //Check for both order and that all measures inside inside are equal
-            for(int i = 0; i <= that.getMeasures().size(); i++){
-                if(!(this.getMeasures().get(i).equals(that.getMeasures().get(i)))){
+            for(int i = 0; i <= that.getSingles().size(); i++){
+                if(!(this.getSingles().get(i).equals(that.getSingles().get(i)))){
                     return false;
                 }
             }
