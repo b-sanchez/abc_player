@@ -53,7 +53,7 @@ public class Music {
      * @param semitonesUp: integer number of semitones to transpose each measure up 
      * @return the piece of Music whose meaures are transposed up by given number of semitones
      */
-    public Music transpose() {
+    public Music transpose(int semitonesUp) {
         // TODO Auto-generated method stub
         return null;
     }
