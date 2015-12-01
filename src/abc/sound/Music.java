@@ -44,13 +44,14 @@ public class Music {
      * @throws IOException 
      * @throws IllegalArgumentException if the expression is invalid
      */
-    public static Map<String,String> parse(File file) throws IOException {
+    public static Map<String,String> parseInfo(File file) throws IOException {
         try {
             String input = "";
+            String input2 = "";
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
                 if(stop) {
-                    input+="";
+                    input2+=line+'\r'+'\n';
                 }
                 else {
                     input+= line+'\r'+'\n';
@@ -75,6 +76,38 @@ public class Music {
         }
     }
     
+    public static List<Single> parseSingles(File file) throws IOException {
+        try {
+            String input = "";
+            String input2 = "";
+            boolean stop = false;
+            for(String line: Files.readAllLines(file.toPath())) {
+                if(stop) {
+                    input2+=line+'\r'+'\n';
+                }
+                else {
+                    input+= line+'\r'+'\n';
+                    if(line.charAt(0)=='K') {
+                        stop=true;
+                    }
+                }
+            }
+            System.out.println(input2);
+            CharStream stream2 = new ANTLRInputStream(input2);
+            HeadingGrammarLexer lexer2 = new HeadingGrammarLexer(stream2);
+            TokenStream tokens2 = new CommonTokenStream(lexer2);
+            HeadingGrammarParser parser2 = new HeadingGrammarParser(tokens2);
+            lexer2.reportErrorsAsExceptions();
+            parser2.reportErrorsAsExceptions();
+            ParseTree tree2 = parser2.root();
+            GetNoteInfo infoGetter2 = new GetNoteInfo();
+            new ParseTreeWalker().walk(infoGetter2, tree2);
+            return infoGetter2.getSingles();
+        } catch(RuntimeException e) {
+            throw new IllegalArgumentException();
+        }
+    }
+    
     /**
      * Constructor for Music object
      * @param measures: List of Single objects to be played in the Music
@@ -85,8 +118,8 @@ public class Music {
     }
     
     public Music(File file) throws IOException {
-        this.infoMap = Music.parse(file);
-        this.singles = new ArrayList<>();
+        this.infoMap = Music.parseInfo(file);
+        this.singles = Music.parseSingles(file);
     }
     
     /**
