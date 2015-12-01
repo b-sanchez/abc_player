@@ -44,8 +44,8 @@ public class Chord implements Single {
     }
     
     /**
-     * Returns the list of Notes to be played in the chord
-     * @return List of Notes in the chord
+     * Returns the set of Notes to be played in the chord
+     * @return Set of Notes in the chord
      */
     public Set<Note> getNotes(){
         checkRep();
