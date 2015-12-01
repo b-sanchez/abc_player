@@ -11,7 +11,7 @@ SIGNATURE: [A-G]('^' | '_')? 'm'?;
 ANYTHING: .+;
 NEWLINE: \n | \r\n;
 RATIONAL: NUMBER '/' NUMBER;
-DURATION: rational | NUMBER;
+DURATION: RATIONAL | NUMBER;
 index: 'X'':'NUMBER NEWLINE;
 title: 'T'':'ANYTHING NEWLINE;
 composer: 'C'':'ANYTHING NEWLINE;
