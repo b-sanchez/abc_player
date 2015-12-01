@@ -19,6 +19,18 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        // CALL play() HERE USING ARGS
+        //play("sample_abc/piece1.abc);
+        //play("sample_abc/piece2.abc);
+        //play("sample_abc/abc_song.abc);
+        //play("sample_abc/fur_elise.abc);
+        //play("sample_abc/invention.abc);
+        //play("sample_abc/little_night_music.abc);
+        //play("sample_abc/paddy.abc);
+        //play("sample_abc/prelude.abc);
+        //play("sample_abc/sample1.abc);
+        //play("sample_abc/sample2.abc);
+        //play("sample_abc/sample3.abc);
+        //play("sample_abc/scale.abc);
+        //play("sample_abc/waxies_dargle.abc);
     }
 }

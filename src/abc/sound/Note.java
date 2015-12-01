@@ -16,7 +16,7 @@ public class Note implements Single {
     //Abstraction Function AF(value):
     //-represents a note in a piece of music that has a defined pitch and duration
     //Safety from Rep Exposure:
-    //-pitch is a Pitch that is immutable and private/final 
+    //-pitch is a Pitch (immutable) that is private/final 
     //-duration is private/final, not explicitly passed
     
     /**
@@ -41,6 +41,10 @@ public class Note implements Single {
         return new Note(this.pitch.transpose(semitonesUp), this.duration);
     }
 
+    /**
+     * Returns the pitch associated with this Note
+     * @return pitch associated with this note
+     */
     public Pitch getPitch() {
         return this.pitch;
     }
