@@ -13,7 +13,7 @@ BAR: '|';
 ENDMAJOR: '[''|' | '|''|' | '|'']';
 ENDING: '['NUM;
 ANYTHING: .+;
-NEWLINE: \n | \r\n;
+NEWLINE: '\n' | '\r''\n';
 duration: NUM? '/'? NUM?;
 pitch: ['=''_''^']*[a-gA-G][','''']*;
 rest: 'z'duration;
