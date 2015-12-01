@@ -59,8 +59,8 @@ public class Music {
      */
     public Music transpose(int semitonesUp) {
         List<Single> transposedList = new ArrayList<Single>();
-        for(int i = 0; i < this.getSingles().size(); i++){
-            transposedList.add(this.getSingles().get(i).transpose(semitonesUp));
+        for(Single single: singles){
+            transposedList.add(single.transpose(semitonesUp));
         }
         return new Music(transposedList);
     }
@@ -101,7 +101,7 @@ public class Music {
                 return false;
             }
             //Check for both order and that all measures inside inside are equal
-            for(int i = 0; i <= that.getSingles().size(); i++){
+            for(int i = 0; i < that.getSingles().size(); i++){
                 if(!(this.getSingles().get(i).equals(that.getSingles().get(i)))){
                     return false;
                 }
