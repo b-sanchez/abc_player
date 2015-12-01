@@ -21,8 +21,8 @@ public class HeadingGrammarParser extends Parser {
     new PredictionContextCache();
   public static final int
     T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-    T__9=10, T__10=11, NUMBER=12, LETTER=13, SIGNATURE=14, NEWLINE=15, RATIONAL=16, 
-    ANYTHING=17, SPACES=18;
+    NUMBER=10, C=11, CBAR=12, SIGNATURE=13, NEWLINE=14, RATIONAL=15, ANYTHING=16, 
+    SPACES=17;
   public static final int
     RULE_duration = 0, RULE_index = 1, RULE_title = 2, RULE_composer = 3, 
     RULE_voice = 4, RULE_meter = 5, RULE_length = 6, RULE_tempo = 7, RULE_key = 8, 
@@ -33,13 +33,12 @@ public class HeadingGrammarParser extends Parser {
   };
 
   private static final String[] _LITERAL_NAMES = {
-    null, "'X'", "':'", "'T'", "'C'", "'V'", "'M'", "'|'", "'L'", "'Q'", 
-    "'='", "'K'"
+    null, "'X'", "':'", "'T'", "'V'", "'M'", "'L'", "'Q'", "'='", "'K'", 
+    null, "'C'"
   };
   private static final String[] _SYMBOLIC_NAMES = {
-    null, null, null, null, null, null, null, null, null, null, null, null, 
-    "NUMBER", "LETTER", "SIGNATURE", "NEWLINE", "RATIONAL", "ANYTHING", 
-    "SPACES"
+    null, null, null, null, null, null, null, null, null, null, "NUMBER", 
+    "C", "CBAR", "SIGNATURE", "NEWLINE", "RATIONAL", "ANYTHING", "SPACES"
   };
   public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -240,6 +239,7 @@ public class HeadingGrammarParser extends Parser {
   }
 
   public static class ComposerContext extends ParserRuleContext {
+    public TerminalNode C() { return getToken(HeadingGrammarParser.C, 0); }
     public TerminalNode ANYTHING() { return getToken(HeadingGrammarParser.ANYTHING, 0); }
     public TerminalNode NEWLINE() { return getToken(HeadingGrammarParser.NEWLINE, 0); }
     public ComposerContext(ParserRuleContext parent, int invokingState) {
@@ -263,7 +263,7 @@ public class HeadingGrammarParser extends Parser {
       enterOuterAlt(_localctx, 1);
       {
       setState(32);
-      match(T__3);
+      match(C);
       setState(33);
       match(T__1);
       setState(34);
@@ -309,7 +309,7 @@ public class HeadingGrammarParser extends Parser {
       enterOuterAlt(_localctx, 1);
       {
       setState(37);
-      match(T__4);
+      match(T__3);
       setState(38);
       match(T__1);
       setState(39);
@@ -337,6 +337,8 @@ public class HeadingGrammarParser extends Parser {
   public static class MeterContext extends ParserRuleContext {
     public TerminalNode NEWLINE() { return getToken(HeadingGrammarParser.NEWLINE, 0); }
     public TerminalNode RATIONAL() { return getToken(HeadingGrammarParser.RATIONAL, 0); }
+    public TerminalNode C() { return getToken(HeadingGrammarParser.C, 0); }
+    public TerminalNode CBAR() { return getToken(HeadingGrammarParser.CBAR, 0); }
     public MeterContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
@@ -354,37 +356,22 @@ public class HeadingGrammarParser extends Parser {
   public final MeterContext meter() throws RecognitionException {
     MeterContext _localctx = new MeterContext(_ctx, getState());
     enterRule(_localctx, 10, RULE_meter);
+    int _la;
     try {
       enterOuterAlt(_localctx, 1);
       {
       setState(42);
-      match(T__5);
+      match(T__4);
       setState(43);
       match(T__1);
-      setState(48);
-      switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
-      case 1:
-        {
-        setState(44);
-        match(RATIONAL);
-        }
-        break;
-      case 2:
-        {
-        setState(45);
-        match(T__3);
-        }
-        break;
-      case 3:
-        {
-        setState(46);
-        match(T__3);
-        setState(47);
-        match(T__6);
-        }
-        break;
+      setState(44);
+      _la = _input.LA(1);
+      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << C) | (1L << CBAR) | (1L << RATIONAL))) != 0)) ) {
+      _errHandler.recoverInline(this);
+      } else {
+        consume();
       }
-      setState(50);
+      setState(45);
       match(NEWLINE);
       }
     }
@@ -424,13 +411,13 @@ public class HeadingGrammarParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(52);
-      match(T__7);
-      setState(53);
+      setState(47);
+      match(T__5);
+      setState(48);
       match(T__1);
-      setState(54);
+      setState(49);
       duration();
-      setState(55);
+      setState(50);
       match(NEWLINE);
       }
     }
@@ -471,17 +458,17 @@ public class HeadingGrammarParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(57);
-      match(T__8);
-      setState(58);
+      setState(52);
+      match(T__6);
+      setState(53);
       match(T__1);
-      setState(59);
+      setState(54);
       duration();
-      setState(60);
-      match(T__9);
-      setState(61);
+      setState(55);
+      match(T__7);
+      setState(56);
       match(NUMBER);
-      setState(62);
+      setState(57);
       match(NEWLINE);
       }
     }
@@ -499,7 +486,7 @@ public class HeadingGrammarParser extends Parser {
   public static class KeyContext extends ParserRuleContext {
     public TerminalNode NEWLINE() { return getToken(HeadingGrammarParser.NEWLINE, 0); }
     public TerminalNode SIGNATURE() { return getToken(HeadingGrammarParser.SIGNATURE, 0); }
-    public TerminalNode LETTER() { return getToken(HeadingGrammarParser.LETTER, 0); }
+    public TerminalNode C() { return getToken(HeadingGrammarParser.C, 0); }
     public KeyContext(ParserRuleContext parent, int invokingState) {
       super(parent, invokingState);
     }
@@ -521,18 +508,18 @@ public class HeadingGrammarParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(64);
-      match(T__10);
-      setState(65);
+      setState(59);
+      match(T__8);
+      setState(60);
       match(T__1);
-      setState(66);
+      setState(61);
       _la = _input.LA(1);
-      if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << LETTER) | (1L << SIGNATURE))) != 0)) ) {
+      if ( !(_la==C || _la==SIGNATURE) ) {
       _errHandler.recoverInline(this);
       } else {
         consume();
       }
-      setState(67);
+      setState(62);
       match(NEWLINE);
       }
     }
@@ -618,58 +605,58 @@ public class HeadingGrammarParser extends Parser {
     try {
       enterOuterAlt(_localctx, 1);
       {
-      setState(77); 
+      setState(72); 
       _errHandler.sync(this);
       _la = _input.LA(1);
       do {
         {
-        setState(77);
+        setState(72);
         switch (_input.LA(1)) {
         case T__0:
           {
-          setState(69);
+          setState(64);
           index();
           }
           break;
         case T__2:
           {
-          setState(70);
+          setState(65);
           title();
+          }
+          break;
+        case C:
+          {
+          setState(66);
+          composer();
           }
           break;
         case T__3:
           {
-          setState(71);
-          composer();
+          setState(67);
+          voice();
           }
           break;
         case T__4:
           {
-          setState(72);
-          voice();
+          setState(68);
+          meter();
           }
           break;
         case T__5:
           {
-          setState(73);
-          meter();
+          setState(69);
+          length();
           }
           break;
-        case T__7:
+        case T__6:
           {
-          setState(74);
-          length();
+          setState(70);
+          tempo();
           }
           break;
         case T__8:
           {
-          setState(75);
-          tempo();
-          }
-          break;
-        case T__10:
-          {
-          setState(76);
+          setState(71);
           key();
           }
           break;
@@ -677,11 +664,11 @@ public class HeadingGrammarParser extends Parser {
           throw new NoViableAltException(this);
         }
         }
-        setState(79); 
+        setState(74); 
         _errHandler.sync(this);
         _la = _input.LA(1);
-      } while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__7) | (1L << T__8) | (1L << T__10))) != 0) );
-      setState(81);
+      } while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__0) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__8) | (1L << C))) != 0) );
+      setState(76);
       match(EOF);
       }
     }
@@ -697,29 +684,27 @@ public class HeadingGrammarParser extends Parser {
   }
 
   public static final String _serializedATN =
-    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\24V\4\2\t\2\4\3"+
+    "\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\23Q\4\2\t\2\4\3"+
       "\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
       "\t\13\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5"+
-      "\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\7\5\7\63\n\7\3"+
-      "\7\3\7\3\b\3\b\3\b\3\b\3\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n"+
-      "\3\n\3\n\3\13\3\13\3\13\3\13\3\13\3\13\3\13\3\13\6\13P\n\13\r\13\16"+
-      "\13Q\3\13\3\13\3\13\2\2\f\2\4\6\b\n\f\16\20\22\24\2\5\4\2\16\16\22"+
-      "\22\4\2\16\16\23\23\4\2\6\6\17\20U\2\26\3\2\2\2\4\30\3\2\2\2\6\35"+
-      "\3\2\2\2\b\"\3\2\2\2\n\'\3\2\2\2\f,\3\2\2\2\16\66\3\2\2\2\20;\3\2"+
-      "\2\2\22B\3\2\2\2\24O\3\2\2\2\26\27\t\2\2\2\27\3\3\2\2\2\30\31\7\3"+
-      "\2\2\31\32\7\4\2\2\32\33\7\16\2\2\33\34\7\21\2\2\34\5\3\2\2\2\35\36"+
-      "\7\5\2\2\36\37\7\4\2\2\37 \7\23\2\2 !\7\21\2\2!\7\3\2\2\2\"#\7\6\2"+
-      "\2#$\7\4\2\2$%\7\23\2\2%&\7\21\2\2&\t\3\2\2\2\'(\7\7\2\2()\7\4\2\2"+
-      ")*\t\3\2\2*+\7\21\2\2+\13\3\2\2\2,-\7\b\2\2-\62\7\4\2\2.\63\7\22\2"+
-      "\2/\63\7\6\2\2\60\61\7\6\2\2\61\63\7\t\2\2\62.\3\2\2\2\62/\3\2\2\2"+
-      "\62\60\3\2\2\2\63\64\3\2\2\2\64\65\7\21\2\2\65\r\3\2\2\2\66\67\7\n"+
-      "\2\2\678\7\4\2\289\5\2\2\29:\7\21\2\2:\17\3\2\2\2;<\7\13\2\2<=\7\4"+
-      "\2\2=>\5\2\2\2>?\7\f\2\2?@\7\16\2\2@A\7\21\2\2A\21\3\2\2\2BC\7\r\2"+
-      "\2CD\7\4\2\2DE\t\4\2\2EF\7\21\2\2F\23\3\2\2\2GP\5\4\3\2HP\5\6\4\2"+
-      "IP\5\b\5\2JP\5\n\6\2KP\5\f\7\2LP\5\16\b\2MP\5\20\t\2NP\5\22\n\2OG"+
-      "\3\2\2\2OH\3\2\2\2OI\3\2\2\2OJ\3\2\2\2OK\3\2\2\2OL\3\2\2\2OM\3\2\2"+
-      "\2ON\3\2\2\2PQ\3\2\2\2QO\3\2\2\2QR\3\2\2\2RS\3\2\2\2ST\7\2\2\3T\25"+
-      "\3\2\2\2\5\62OQ";
+      "\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\3\7\3\b\3\b\3\b\3\b\3"+
+      "\b\3\t\3\t\3\t\3\t\3\t\3\t\3\t\3\n\3\n\3\n\3\n\3\n\3\13\3\13\3\13"+
+      "\3\13\3\13\3\13\3\13\3\13\6\13K\n\13\r\13\16\13L\3\13\3\13\3\13\2"+
+      "\2\f\2\4\6\b\n\f\16\20\22\24\2\6\4\2\f\f\21\21\4\2\f\f\22\22\4\2\r"+
+      "\16\21\21\4\2\r\r\17\17N\2\26\3\2\2\2\4\30\3\2\2\2\6\35\3\2\2\2\b"+
+      "\"\3\2\2\2\n\'\3\2\2\2\f,\3\2\2\2\16\61\3\2\2\2\20\66\3\2\2\2\22="+
+      "\3\2\2\2\24J\3\2\2\2\26\27\t\2\2\2\27\3\3\2\2\2\30\31\7\3\2\2\31\32"+
+      "\7\4\2\2\32\33\7\f\2\2\33\34\7\20\2\2\34\5\3\2\2\2\35\36\7\5\2\2\36"+
+      "\37\7\4\2\2\37 \7\22\2\2 !\7\20\2\2!\7\3\2\2\2\"#\7\r\2\2#$\7\4\2"+
+      "\2$%\7\22\2\2%&\7\20\2\2&\t\3\2\2\2\'(\7\6\2\2()\7\4\2\2)*\t\3\2\2"+
+      "*+\7\20\2\2+\13\3\2\2\2,-\7\7\2\2-.\7\4\2\2./\t\4\2\2/\60\7\20\2\2"+
+      "\60\r\3\2\2\2\61\62\7\b\2\2\62\63\7\4\2\2\63\64\5\2\2\2\64\65\7\20"+
+      "\2\2\65\17\3\2\2\2\66\67\7\t\2\2\678\7\4\2\289\5\2\2\29:\7\n\2\2:"+
+      ";\7\f\2\2;<\7\20\2\2<\21\3\2\2\2=>\7\13\2\2>?\7\4\2\2?@\t\5\2\2@A"+
+      "\7\20\2\2A\23\3\2\2\2BK\5\4\3\2CK\5\6\4\2DK\5\b\5\2EK\5\n\6\2FK\5"+
+      "\f\7\2GK\5\16\b\2HK\5\20\t\2IK\5\22\n\2JB\3\2\2\2JC\3\2\2\2JD\3\2"+
+      "\2\2JE\3\2\2\2JF\3\2\2\2JG\3\2\2\2JH\3\2\2\2JI\3\2\2\2KL\3\2\2\2L"+
+      "J\3\2\2\2LM\3\2\2\2MN\3\2\2\2NO\7\2\2\3O\25\3\2\2\2\4JL";
   public static final ATN _ATN =
     new ATNDeserializer().deserialize(_serializedATN.toCharArray());
   static {

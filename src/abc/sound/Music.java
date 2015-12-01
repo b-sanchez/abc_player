@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
-
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +28,7 @@ public class Music {
 
     
     private final List<Single> singles;
+    private final Map<String,String> infoMap;
 
     //Rep Invariant:
     //-this.getDuration() > 0
@@ -80,6 +81,12 @@ public class Music {
      */
     public Music(List<Single> singles){
         this.singles = singles;
+        this.infoMap = new HashMap<String,String>();
+    }
+    
+    public Music(File file) throws IOException {
+        this.infoMap = Music.parse(file);
+        this.singles = new ArrayList<>();
     }
     
     /**

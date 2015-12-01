@@ -29,7 +29,7 @@ public class MusicTest {
     //-1, 2+ Singles
     @Test
     public void testInfoGetter() throws IOException {
-        System.out.println(Music.parse(new File("sample_abc/piece1.abc")));
+        System.out.println(Music.parse(new File("sample_abc/fur_elise.abc")));
     }
     @Test
     public void testGetSinglesMultiple(){
