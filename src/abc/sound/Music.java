@@ -1,6 +1,7 @@
 package abc.sound;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class Music {
     
     /**
      * Constructor for Music object
-     * @param measures: List of Measure objects to be played in the Music
+     * @param measures: List of Single objects to be played in the Music
      */
     public Music(List<Single> singles){
         this.singles = singles;
@@ -44,7 +45,7 @@ public class Music {
     }
     
     /**
-     * Returns the list of measures to be played in the measure
+     * Returns the list of singles to be played in the measure
      * @return List of measures in the Music object
      */
     public List<Single> getSingles(){
@@ -52,13 +53,16 @@ public class Music {
     }
     
     /**
-     * Transposes the measures in a piece up by a certain number of semitones
-     * @param semitonesUp: integer number of semitones to transpose each measure up 
-     * @return the piece of Music whose meaures are transposed up by given number of semitones
+     * Transposes the singles (chord, note, or rest) in a piece up by a certain number of semitones
+     * @param semitonesUp: integer number of semitones to transpose each single up 
+     * @return the piece of Music whose singles are transposed up by given number of semitones
      */
     public Music transpose(int semitonesUp) {
-        // TODO Auto-generated method stub
-        return null;
+        List<Single> transposedList = new ArrayList<Single>();
+        for(int i = 0; i < this.getSingles().size(); i++){
+            transposedList.add(this.getSingles().get(i).transpose(semitonesUp));
+        }
+        return new Music(transposedList);
     }
     
     /**

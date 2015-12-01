@@ -2,6 +2,7 @@ package abc.sound;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +19,7 @@ public class ChordTest {
     
     @Test
     public void testGetSinglesOneNote() {
-        Set<Note> notes = new HashSet<>();
+        Set<Note> notes = new HashSet<Note>();
         notes.add(new Note(new Pitch('C'), 10));
         Chord chord = new Chord(notes);
         assertEquals(chord.getNotes(), new HashSet<>(Arrays.asList(new Note(new Pitch('C'), 10))));

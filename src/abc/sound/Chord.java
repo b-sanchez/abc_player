@@ -1,7 +1,11 @@
 package abc.sound;
 
 import java.io.IOException;
+
+
 import java.util.Collections;
+import java.util.HashSet;
+
 import java.util.Set;
 
 import javax.sound.midi.InvalidMidiDataException;
@@ -47,8 +51,11 @@ public class Chord implements Single {
     
     @Override
     public Chord transpose(int semitonesUp) {
-        // TODO Auto-generated method stub
-        return null;
+        Set<Note> transposedSet = new HashSet<Note>();
+        for(Note note: notes){
+            transposedSet.add((Note) note.transpose(semitonesUp));
+        }
+        return new Chord(transposedSet);
     }
     
 
