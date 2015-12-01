@@ -8,8 +8,8 @@ import Configuration;
 
 NUMBER: [0-9]+;
 SIGNATURE: [A-G]('^' | '_')? 'm'?;
-ANYTHING: .+;
-NEWLINE: \n | \r\n;
+ANYTHING: .+?;
+NEWLINE: '\n' | '\r''\n';
 RATIONAL: NUMBER '/' NUMBER;
 DURATION: RATIONAL | NUMBER;
 index: 'X'':'NUMBER NEWLINE;
