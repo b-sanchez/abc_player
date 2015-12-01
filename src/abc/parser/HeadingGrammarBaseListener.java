@@ -19,6 +19,18 @@ public class HeadingGrammarBaseListener implements HeadingGrammarListener {
    *
    * <p>The default implementation does nothing.</p>
    */
+  @Override public void enterDuration(HeadingGrammarParser.DurationContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitDuration(HeadingGrammarParser.DurationContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
   @Override public void enterIndex(HeadingGrammarParser.IndexContext ctx) { }
   /**
    * {@inheritDoc}

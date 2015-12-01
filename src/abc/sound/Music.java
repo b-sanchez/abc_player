@@ -1,13 +1,25 @@
 package abc.sound;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
+
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
+import org.antlr.v4.runtime.tree.ParseTreeWalker;
+
+import abc.parser.*;
 
 public class Music {
     
@@ -23,6 +35,44 @@ public class Music {
     //-represents a piece of music that contains singles (Rests, Notes, Chords) to be played
     //Safety from Rep Exposure:
     //-singles is List of an immutable type Single, and is private and final (not passed between classes)
+    
+    /**
+     * Parse a Music.
+     * @param input expression to parse, as defined in the PS3 handout.
+     * @return expression AST for the input
+     * @throws IOException 
+     * @throws IllegalArgumentException if the expression is invalid
+     */
+    public static Map<String,String> parse(File file) throws IOException {
+        try {
+            String input = "";
+            boolean stop = false;
+            for(String line: Files.readAllLines(file.toPath())) {
+                if(stop) {
+                    input+="";
+                }
+                else {
+                    input+= line+'\r'+'\n';
+                    if(line.charAt(0)=='K') {
+                        stop=true;
+                    }
+                }
+            }
+            System.out.println(input);
+            CharStream stream = new ANTLRInputStream(input);
+            HeadingGrammarLexer lexer = new HeadingGrammarLexer(stream);
+            TokenStream tokens = new CommonTokenStream(lexer);
+            HeadingGrammarParser parser = new HeadingGrammarParser(tokens);
+            lexer.reportErrorsAsExceptions();
+            parser.reportErrorsAsExceptions();
+            ParseTree tree = parser.root();
+            GetHeadingInfo infoGetter = new GetHeadingInfo();
+            new ParseTreeWalker().walk(infoGetter, tree);
+            return infoGetter.getInfoMap();
+        } catch(RuntimeException e) {
+            throw new IllegalArgumentException();
+        }
+    }
     
     /**
      * Constructor for Music object

@@ -2,6 +2,8 @@ package abc.sound;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,10 @@ public class MusicTest {
     
     //toString():
     //-1, 2+ Singles
-    
+    @Test
+    public void testInfoGetter() throws IOException {
+        System.out.println(Music.parse(new File("sample_abc/piece1.abc")));
+    }
     @Test
     public void testGetSinglesMultiple(){
         List<Single> noteList = new ArrayList<Single>();

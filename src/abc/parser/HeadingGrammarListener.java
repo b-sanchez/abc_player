@@ -11,6 +11,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface HeadingGrammarListener extends ParseTreeListener {
   /**
+   * Enter a parse tree produced by {@link HeadingGrammarParser#duration}.
+   * @param ctx the parse tree
+   */
+  void enterDuration(HeadingGrammarParser.DurationContext ctx);
+  /**
+   * Exit a parse tree produced by {@link HeadingGrammarParser#duration}.
+   * @param ctx the parse tree
+   */
+  void exitDuration(HeadingGrammarParser.DurationContext ctx);
+  /**
    * Enter a parse tree produced by {@link HeadingGrammarParser#index}.
    * @param ctx the parse tree
    */
