@@ -17,10 +17,12 @@ public class Chord implements Single {
     
     //Rep Invariant:
     //-this.getDuration() > 0
+    //-notes is non-empty
     //Abstraction Function AF(value):
-    //-
+    //-represents a chord to be played in a piece of music that contains a set of notes (each of which as a pitch and duration)
     //Safety from Rep Exposure:
-    //-
+    //-notes is Set of immutable Note objects.
+    //-notes is final/private, and isn't passed between classes
     
     /**
      * Constructor for Chord object
@@ -46,21 +48,25 @@ public class Chord implements Single {
      * @return List of Notes in the chord
      */
     public Set<Note> getNotes(){
+        checkRep();
         return Collections.unmodifiableSet(this.notes);
     }
     
     @Override
     public Chord transpose(int semitonesUp) {
+        checkRep();
         Set<Note> transposedSet = new HashSet<Note>();
         for(Note note: notes){
             transposedSet.add((Note) note.transpose(semitonesUp));
         }
+        checkRep();
         return new Chord(transposedSet);
     }
     
 
     @Override
     public String toString() {
+        checkRep();
         //A chord will just be the notes appended together
         StringBuilder finalString = new StringBuilder();
         finalString.append("[");
@@ -93,6 +99,13 @@ public class Chord implements Single {
     @Override
     public String getType() {
         return "chord";
+    }
+    
+    /**
+     * Assert the Rep Invariant
+     */
+    private void checkRep(){
+        assert this.getDuration() > 0;
     }
     
     @Override

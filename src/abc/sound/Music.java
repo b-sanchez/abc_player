@@ -20,9 +20,9 @@ public class Music {
     //Rep Invariant:
     //-this.getDuration() > 0
     //Abstraction Function AF(value):
-    //-
+    //-represents a piece of music that contains singles (Rests, Notes, Chords) to be played
     //Safety from Rep Exposure:
-    //-
+    //-singles is List of an immutable type Single, and is private and final (not passed between classes)
     
     /**
      * Constructor for Music object
@@ -49,6 +49,7 @@ public class Music {
      * @return List of measures in the Music object
      */
     public List<Single> getSingles(){
+        checkRep();
         return Collections.unmodifiableList(this.singles);
     }
     
@@ -58,10 +59,12 @@ public class Music {
      * @return the piece of Music whose singles are transposed up by given number of semitones
      */
     public Music transpose(int semitonesUp) {
+        checkRep();
         List<Single> transposedList = new ArrayList<Single>();
         for(Single single: singles){
             transposedList.add(single.transpose(semitonesUp));
         }
+        checkRep();
         return new Music(transposedList);
     }
     
@@ -71,6 +74,7 @@ public class Music {
      */
     @Override
     public String toString() {
+        checkRep();
         StringBuilder piece = new StringBuilder();
         for(Single single: singles){
             piece.append(single.toString());
@@ -109,6 +113,13 @@ public class Music {
             return true;
         }
         return false;
+    }
+    
+    /**
+     * Assert the Rep Invariant
+     */
+    private void checkRep(){
+        assert this.getDuration() > 0;
     }
     
     /**

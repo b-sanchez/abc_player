@@ -14,9 +14,10 @@ public class Note implements Single {
     //Rep Invariant:
     //-this.duration > 0
     //Abstraction Function AF(value):
-    //-
+    //-represents a note in a piece of music that has a defined pitch and duration
     //Safety from Rep Exposure:
-    //-
+    //-pitch is a Pitch that is immutable and private/final 
+    //-duration is private/final, not explicitly passed
     
     /**
      * Constructor for a Single that is a note
@@ -26,6 +27,7 @@ public class Note implements Single {
     public Note(Pitch pitch, int duration){
         this.pitch = pitch;
         this.duration = duration;
+        checkRep();
     }
 
     @Override
@@ -35,6 +37,7 @@ public class Note implements Single {
 
     @Override
     public Single transpose(int semitonesUp) {
+        checkRep();
         return new Note(this.pitch.transpose(semitonesUp), this.duration);
     }
 
@@ -49,6 +52,7 @@ public class Note implements Single {
     
     @Override
     public String toString() {
+        checkRep();
         //Just return the String of the pitch of the note
         return this.pitch.toString();
     }
@@ -66,6 +70,13 @@ public class Note implements Single {
             return (that.getPitch().equals(this.getPitch())) && (that.getDuration() == this.getDuration());
          }
          return false;
+    }
+    
+    /**
+     * Assert the Rep Invariant
+     */
+    private void checkRep(){
+        assert this.getDuration() > 0;
     }
     
     @Override
