@@ -12,7 +12,7 @@ CLOSER: ':''|';
 BAR: '|';
 ENDMAJOR: '[''|' | '|''|' | '|'']';
 ENDING: '['NUM;
-ANYTHING: .+;
+ANYTHING: .+?;
 NEWLINE: '\n' | '\r''\n';
 duration: NUM? '/'? NUM?;
 pitch: ['=''_''^']*[a-gA-G][','''']*;
