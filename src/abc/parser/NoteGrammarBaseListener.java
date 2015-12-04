@@ -19,37 +19,49 @@ public class NoteGrammarBaseListener implements NoteGrammarListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterDuration(NoteGrammarParser.DurationContext ctx) { }
+  @Override public void enterAbcmusic(NoteGrammarParser.AbcmusicContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitDuration(NoteGrammarParser.DurationContext ctx) { }
+  @Override public void exitAbcmusic(NoteGrammarParser.AbcmusicContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterPitch(NoteGrammarParser.PitchContext ctx) { }
+  @Override public void enterAbcline(NoteGrammarParser.AbclineContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitPitch(NoteGrammarParser.PitchContext ctx) { }
+  @Override public void exitAbcline(NoteGrammarParser.AbclineContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterRest(NoteGrammarParser.RestContext ctx) { }
+  @Override public void enterElement(NoteGrammarParser.ElementContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitRest(NoteGrammarParser.RestContext ctx) { }
+  @Override public void exitElement(NoteGrammarParser.ElementContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterNoteelement(NoteGrammarParser.NoteelementContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitNoteelement(NoteGrammarParser.NoteelementContext ctx) { }
   /**
    * {@inheritDoc}
    *
@@ -67,85 +79,217 @@ public class NoteGrammarBaseListener implements NoteGrammarListener {
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterChord(NoteGrammarParser.ChordContext ctx) { }
+  @Override public void enterNoteorrest(NoteGrammarParser.NoteorrestContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitChord(NoteGrammarParser.ChordContext ctx) { }
+  @Override public void exitNoteorrest(NoteGrammarParser.NoteorrestContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterTuplet(NoteGrammarParser.TupletContext ctx) { }
+  @Override public void enterPitch(NoteGrammarParser.PitchContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitTuplet(NoteGrammarParser.TupletContext ctx) { }
+  @Override public void exitPitch(NoteGrammarParser.PitchContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterSingle(NoteGrammarParser.SingleContext ctx) { }
+  @Override public void enterOctave(NoteGrammarParser.OctaveContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitSingle(NoteGrammarParser.SingleContext ctx) { }
+  @Override public void exitOctave(NoteGrammarParser.OctaveContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterRepeatsec(NoteGrammarParser.RepeatsecContext ctx) { }
+  @Override public void enterNotelength(NoteGrammarParser.NotelengthContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitRepeatsec(NoteGrammarParser.RepeatsecContext ctx) { }
+  @Override public void exitNotelength(NoteGrammarParser.NotelengthContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterSection(NoteGrammarParser.SectionContext ctx) { }
+  @Override public void enterNotelengthstrict(NoteGrammarParser.NotelengthstrictContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitSection(NoteGrammarParser.SectionContext ctx) { }
+  @Override public void exitNotelengthstrict(NoteGrammarParser.NotelengthstrictContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterVoice(NoteGrammarParser.VoiceContext ctx) { }
+  @Override public void enterAccidental(NoteGrammarParser.AccidentalContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitVoice(NoteGrammarParser.VoiceContext ctx) { }
+  @Override public void exitAccidental(NoteGrammarParser.AccidentalContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void enterRoot(NoteGrammarParser.RootContext ctx) { }
+  @Override public void enterBasenote(NoteGrammarParser.BasenoteContext ctx) { }
   /**
    * {@inheritDoc}
    *
    * <p>The default implementation does nothing.</p>
    */
-  @Override public void exitRoot(NoteGrammarParser.RootContext ctx) { }
+  @Override public void exitBasenote(NoteGrammarParser.BasenoteContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterRest(NoteGrammarParser.RestContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitRest(NoteGrammarParser.RestContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterTupletelement(NoteGrammarParser.TupletelementContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitTupletelement(NoteGrammarParser.TupletelementContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterTupletspec(NoteGrammarParser.TupletspecContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitTupletspec(NoteGrammarParser.TupletspecContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterMultinote(NoteGrammarParser.MultinoteContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitMultinote(NoteGrammarParser.MultinoteContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterBarline(NoteGrammarParser.BarlineContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitBarline(NoteGrammarParser.BarlineContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterNthrepeat(NoteGrammarParser.NthrepeatContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitNthrepeat(NoteGrammarParser.NthrepeatContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterMidtunefield(NoteGrammarParser.MidtunefieldContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitMidtunefield(NoteGrammarParser.MidtunefieldContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterFieldvoice(NoteGrammarParser.FieldvoiceContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitFieldvoice(NoteGrammarParser.FieldvoiceContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterComment(NoteGrammarParser.CommentContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitComment(NoteGrammarParser.CommentContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterEndofline(NoteGrammarParser.EndoflineContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitEndofline(NoteGrammarParser.EndoflineContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void enterAnything(NoteGrammarParser.AnythingContext ctx) { }
+  /**
+   * {@inheritDoc}
+   *
+   * <p>The default implementation does nothing.</p>
+   */
+  @Override public void exitAnything(NoteGrammarParser.AnythingContext ctx) { }
 
   /**
    * {@inheritDoc}

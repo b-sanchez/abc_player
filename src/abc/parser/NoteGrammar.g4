@@ -6,26 +6,41 @@
 grammar NoteGrammar;
 import Configuration;
 
-NUM: [0-9]+;
-OPENR: '|'':';
-CLOSER: ':''|';
-BAR: '|';
-ENDMAJOR: ('[''|') | ('|''|') | ('|'']');
-ENDING: '['NUM;
-ANYTHING: (LETTER | [H-Z] | [h-y] | LILZ | NUM | ['!' '@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ])+;
-NEWLINE: '\n' | '\r''\n';
-LETTER: ([A-G]|[a-g]);
-LILZ: 'z';
-duration: ('/' NUM) | '/' | (NUM '/' NUM) | NUM;
-pitch: ('='|'_'|'^')* LETTER (','|('\''))*;
-rest: LILZ duration;
-note: pitch duration;
-chord: '[' note+ ']';
-tuplet: '(' NUM note+;
-single: chord|note|rest|tuplet;
-repeatsec: (OPENR | ENDMAJOR)? (single | ENDING)+ CLOSER ENDING?;
-section: (single | repeatsec)+ NEWLINE;
-voice: 'V'':' ANYTHING NEWLINE;
-root: (voice? section)+ ENDMAJOR? EOF;
+abcmusic: abcline+;
+abcline: element+ NEWLINE | midtunefield | comment;
+element: noteelement | tupletelement | barline | nthrepeat | WHITESPACE; 
 
-SPACES : [ ]+ -> skip;
+noteelement: note | multinote;
+
+note: noteorrest notelength;
+noteorrest: pitch | rest;
+pitch: accidental? basenote octave?;
+octave: '\''+ | ','+;
+notelength: (DIGIT+)? ('/' (DIGIT+)?)?;
+notelengthstrict: DIGIT+ '/' DIGIT+;
+
+accidental: '^' | ('^''^') | '_' | ('_''_') | '=';
+
+basenote: 'C' | 'D' | 'E' | 'F' | 'G' | 'A' | 'B' | 'c' | 'd' | 'e' | 'f' | 'g' | 'a' | 'b';
+
+rest: 'z';
+
+tupletelement: tupletspec noteelement+;
+tupletspec: '(' DIGIT;
+
+multinote: '[' note+ ']';
+
+barline: '|' | ('|''|') | ('[''|') | ('|'']') | (':''|') | ('|'':');
+nthrepeat: '['DIGIT;
+
+midtunefield: fieldvoice;
+fieldvoice: 'V'':' anything endofline;
+
+comment: '%' anything NEWLINE;
+endofline: comment | NEWLINE;
+
+NONBASENOTE: ([H-Z] | [h-y] | ['!' '@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ]);
+anything: (basenote | NONBASENOTE | rest | DIGIT)+;
+DIGIT: [0-9];
+NEWLINE: '\n' | '\r' '\n'?;
+WHITESPACE: [ ]+ | [\t]+;
