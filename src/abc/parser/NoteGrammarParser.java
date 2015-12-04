@@ -233,6 +233,7 @@ public class NoteGrammarParser extends Parser {
       case WHITESPACE:
         enterOuterAlt(_localctx, 1);
         {
+        {
         setState(54); 
         _errHandler.sync(this);
         _la = _input.LA(1);
@@ -249,6 +250,7 @@ public class NoteGrammarParser extends Parser {
         } while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14) | (1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__24) | (1L << T__25) | (1L << WHITESPACE))) != 0) );
         setState(58);
         match(NEWLINE);
+        }
         }
         break;
       case T__26:

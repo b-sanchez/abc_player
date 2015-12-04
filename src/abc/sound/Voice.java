@@ -65,9 +65,10 @@ public class Voice {
                     }
                 }
             }
-            String input3 = input2.replaceAll("\\s+","!");
-            System.out.println(input3);
-            CharStream stream2 = new ANTLRInputStream(input3);
+            String input3 = input2.replaceAll(" ","!");
+            String input4 = input3.replaceAll("\t","!");
+            System.out.println(input4);
+            CharStream stream2 = new ANTLRInputStream(input4);
             NoteGrammarLexer lexer2 = new NoteGrammarLexer(stream2);
             TokenStream tokens2 = new CommonTokenStream(lexer2);
             NoteGrammarParser parser2 = new NoteGrammarParser(tokens2);

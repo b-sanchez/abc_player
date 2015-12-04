@@ -7,7 +7,7 @@ grammar NoteGrammar;
 import Configuration;
 
 abcmusic: abcline+ EOF;
-abcline: element+ NEWLINE | midtunefield | comment;
+abcline: (element+ NEWLINE) | midtunefield | comment;
 element: noteelement | tupletelement | barline | nthrepeat | WHITESPACE; 
 
 noteelement: note | multinote;
