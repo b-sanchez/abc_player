@@ -6,7 +6,7 @@
 grammar NoteGrammar;
 import Configuration;
 
-abcmusic: abcline+;
+abcmusic: abcline+ EOF;
 abcline: element+ NEWLINE | midtunefield | comment;
 element: noteelement | tupletelement | barline | nthrepeat | WHITESPACE; 
 
@@ -39,8 +39,8 @@ fieldvoice: 'V'':' anything endofline;
 comment: '%' anything NEWLINE;
 endofline: comment | NEWLINE;
 
-NONBASENOTE: ([H-Z] | [h-y] | ['!' '@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ]);
+NONBASENOTE: ([H-Z] | [h-y] | ['@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ]);
 anything: (basenote | NONBASENOTE | rest | DIGIT)+;
 DIGIT: [0-9];
 NEWLINE: '\n' | '\r' '\n'?;
-WHITESPACE: [ ]+ | [\t]+;
+WHITESPACE: '!'+;
