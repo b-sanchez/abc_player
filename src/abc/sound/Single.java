@@ -22,13 +22,5 @@ public interface Single {
      */
     public int getDuration();
     
-    /**
-     * Plays the Single.
-     * addNote(base, tick, duration) schedules a note with pitch value 'base'
-     * starting at 'tick' to be played for 'duration' number of ticks. For example,
-     * addNote(new Pitch('C').toMidiNote(), 10, 1) plays the middle C at
-     * time step 10 for half the duration of a beat.
-     */
-    public void play();
     
 }
