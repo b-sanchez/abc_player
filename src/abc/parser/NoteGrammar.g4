@@ -12,13 +12,13 @@ CLOSER: ':''|';
 BAR: '|';
 ENDMAJOR: ('[''|') | ('|''|') | ('|'']');
 ENDING: '['NUM;
-ANYTHING: ([A-Z] | [a-z] | [ ] | NUM | ['!' '@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ])+;
+ANYTHING: (LETTER | [H-Z] | [h-y] | LILZ | NUM | ['!' '@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ])+;
 NEWLINE: '\n' | '\r''\n';
-LETTER: [A-G]|[a-g];
-SLASH: '/';
-duration: (NUM SLASH NUM);
+LETTER: ([A-G]|[a-g]);
+LILZ: 'z';
+duration: ('/' NUM) | '/' | (NUM '/' NUM) | NUM;
 pitch: ('='|'_'|'^')* LETTER (','|('\''))*;
-rest: 'z'duration;
+rest: LILZ duration;
 note: pitch duration;
 chord: '[' note+ ']';
 tuplet: '(' NUM note+;
@@ -26,6 +26,6 @@ single: chord|note|rest|tuplet;
 repeatsec: (OPENR | ENDMAJOR)? (single | ENDING)+ CLOSER ENDING?;
 section: (single | repeatsec)+ NEWLINE;
 voice: 'V'':' ANYTHING NEWLINE;
-root: (voice? section)+ EOF;
+root: (voice? section)+ ENDMAJOR? EOF;
 
-
+SPACES : [ ]+ -> skip;

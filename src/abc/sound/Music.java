@@ -94,9 +94,9 @@ public class Music {
             }
             System.out.println(input2);
             CharStream stream2 = new ANTLRInputStream(input2);
-            HeadingGrammarLexer lexer2 = new HeadingGrammarLexer(stream2);
+            NoteGrammarLexer lexer2 = new NoteGrammarLexer(stream2);
             TokenStream tokens2 = new CommonTokenStream(lexer2);
-            HeadingGrammarParser parser2 = new HeadingGrammarParser(tokens2);
+            NoteGrammarParser parser2 = new NoteGrammarParser(tokens2);
             lexer2.reportErrorsAsExceptions();
             parser2.reportErrorsAsExceptions();
             ParseTree tree2 = parser2.root();
