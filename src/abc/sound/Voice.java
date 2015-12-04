@@ -182,30 +182,12 @@ public class Voice {
     }
     
     /**
-     * Plays the Music piece.
-     * addNote(base, tick, duration) schedules a note with pitch value 'base'
-     * starting at 'tick' to be played for 'duration' number of ticks. For example,
-     * addNote(new Pitch('C').toMidiNote(), 10, 1) plays the middle C at
-     * time step 10 for half the duration of a beat.
+     * Plays the Singles in this Voice object sequentially
      */
     public void play(){
-        try {
-            SequencePlayer player = new SequencePlayer(140, 12);
-    
-        System.out.println(player);
-
-        // play!
-        player.play();
-        
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        } catch (MidiUnavailableException mue) {
-            mue.printStackTrace();
-        } catch (InvalidMidiDataException imde) {
-            imde.printStackTrace();
+        for(int i = 0; i < singles.size(); i++){
+            singles.get(0).play();
         }
     }
+    
 }

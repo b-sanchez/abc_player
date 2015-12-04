@@ -2,8 +2,6 @@ package abc.sound;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,13 +10,13 @@ import org.junit.Test;
 public class MusicTest {
     
     //TESTING STRATEGY:
-    //Methods to test: getSingles, getDuration, transpose, toString
+    //Methods to test: getVoices, getDuration, transpose, toString
     
-    //getSingles():
-    //-1, 2+ Singles
+    //getVoices():
+    //-1, 2+ Voices
     
     //getDuration():
-    //-1, 2+ Singles
+    //-1, 2+ Voices
     //-(duration must be > 0 as part of the Rep Invariant)
     
     //transpose():
@@ -27,12 +25,9 @@ public class MusicTest {
     
     //toString():
     //-1, 2+ Singles
+
     @Test
-    public void testInfoGetter() throws IOException {
-        System.out.println(Music.parseSingles(new File("sample_abc/piece2.abc")));
-    }
-    @Test
-    public void testGetSinglesMultiple(){
+    public void testGetVoicesMultiple(){
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         Single note2 = new Note(new Pitch('E'), 12);
@@ -40,21 +35,29 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Music music = new Music(noteList);
-        assertEquals(noteList, music.getSingles());
+        Voice voice = new Voice(noteList);
+        Voice voice2 = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
+        voiceList.add(voice2);
+        Music music = new Music(voiceList);
+        assertEquals(voiceList, music.getVoices());
     }
     
     @Test
-    public void testGetSinglesOne(){
+    public void testGetVoicesOne(){
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Music music = new Music(noteList);
-        assertEquals(noteList, music.getSingles());
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
+        Music music = new Music(voiceList);
+        assertEquals(voiceList, music.getVoices());
     }
     
     @Test
-    public void testGetDurationSinglesMultiple(){
+    public void testGetDurationVoicesMultiple(){
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         Single note2 = new Note(new Pitch('E'), 12);
@@ -62,16 +65,26 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Music music = new Music(noteList);
+        Voice voice = new Voice(noteList);
+        Voice voice2 = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
+        voiceList.add(voice2);
+        Music music = new Music(voiceList);
+        assertEquals(voiceList, music.getVoices());
         assertEquals(36, music.getDuration());
     }
     
     @Test
-    public void testGetDurationSinglesOne(){
+    public void testGetDurationVoicesOne(){
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Music music = new Music(noteList);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
+        Music music = new Music(voiceList);
+        assertEquals(voiceList, music.getVoices());
         assertEquals(12, music.getDuration());
     }
     
@@ -84,6 +97,9 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('D'), 12);
         Single note5 = new Note(new Pitch('E'), 12);
@@ -91,8 +107,11 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Music music = new Music(noteList);
-        Music music2 = new Music(noteList2);
+        Voice voice2 = new Voice(noteList2);
+        List<Voice> voiceList2 = new ArrayList<Voice>();
+        voiceList2.add(voice2);
+        Music music = new Music(voiceList);
+        Music music2 = new Music(voiceList2);
         assertEquals(music2, music.transpose(2));
     }
     
@@ -105,6 +124,9 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('C'), 12);
         Single note5 = new Note(new Pitch('D'), 12);
@@ -112,8 +134,11 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Music music = new Music(noteList);
-        Music music2 = new Music(noteList2);
+        Voice voice2 = new Voice(noteList2);
+        List<Voice> voiceList2 = new ArrayList<Voice>();
+        voiceList2.add(voice2);
+        Music music = new Music(voiceList);
+        Music music2 = new Music(voiceList2);
         assertEquals(music2, music.transpose(-2));
     }
     
@@ -126,6 +151,9 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('D'), 12);
         Single note5 = new Note(new Pitch('E'), 12);
@@ -133,8 +161,11 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Music music = new Music(noteList);
-        Music music2 = new Music(noteList2);
+        Voice voice2 = new Voice(noteList2);
+        List<Voice> voiceList2 = new ArrayList<Voice>();
+        voiceList2.add(voice2);
+        Music music = new Music(voiceList);
+        Music music2 = new Music(voiceList2);
         assertEquals(music2, music.transpose(0));
     }
     
@@ -147,6 +178,9 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('D'), 12);
         Single note5 = new Note(new Pitch('E'), 12);
@@ -154,8 +188,11 @@ public class MusicTest {
         noteList2.add(note4.transpose(Pitch.OCTAVE));
         noteList2.add(note5.transpose(Pitch.OCTAVE));
         noteList2.add(note6.transpose(Pitch.OCTAVE));
-        Music music = new Music(noteList);
-        Music music2 = new Music(noteList2);
+        Voice voice2 = new Voice(noteList2);
+        List<Voice> voiceList2 = new ArrayList<Voice>();
+        voiceList2.add(voice2);
+        Music music = new Music(voiceList);
+        Music music2 = new Music(voiceList2);
         assertEquals(music2, music.transpose(14));
     }
     
@@ -168,6 +205,9 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
+        Voice voice = new Voice(noteList);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('C'), 12);
         Single note5 = new Note(new Pitch('D'), 12);
@@ -175,8 +215,11 @@ public class MusicTest {
         noteList2.add(note4.transpose(-Pitch.OCTAVE));
         noteList2.add(note5.transpose(-Pitch.OCTAVE));
         noteList2.add(note6.transpose(-Pitch.OCTAVE));
-        Music music = new Music(noteList);
-        Music music2 = new Music(noteList2);
+        Voice voice2 = new Voice(noteList2);
+        List<Voice> voiceList2 = new ArrayList<Voice>();
+        voiceList2.add(voice2);
+        Music music = new Music(voiceList);
+        Music music2 = new Music(voiceList2);
         assertEquals(music2, music.transpose(-14));
     }
     

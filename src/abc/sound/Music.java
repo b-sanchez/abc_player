@@ -27,11 +27,12 @@ public class Music {
     // Music = List<Singles>
 
     
-    private final List<Single> singles;
+    private final List<Voice> voices;
     private final Map<String,String> infoMap;
 
     //Rep Invariant:
     //-this.getDuration() > 0
+    //-duration of all Voice objects in voices are the same
     //Abstraction Function AF(value):
     //-represents a piece of music that contains singles (Rests, Notes, Chords) to be played
     //Safety from Rep Exposure:
@@ -76,50 +77,19 @@ public class Music {
         }
     }
     
-    public static List<Single> parseSingles(File file) throws IOException {
-        try {
-            String input = "";
-            String input2 = "";
-            boolean stop = false;
-            for(String line: Files.readAllLines(file.toPath())) {
-                if(stop) {
-                    input2+=line+'\r'+'\n';
-                }
-                else {
-                    input+= line+'\r'+'\n';
-                    if(line.charAt(0)=='K') {
-                        stop=true;
-                    }
-                }
-            }
-            System.out.println(input2);
-            CharStream stream2 = new ANTLRInputStream(input2);
-            NoteGrammarLexer lexer2 = new NoteGrammarLexer(stream2);
-            TokenStream tokens2 = new CommonTokenStream(lexer2);
-            NoteGrammarParser parser2 = new NoteGrammarParser(tokens2);
-            lexer2.reportErrorsAsExceptions();
-            parser2.reportErrorsAsExceptions();
-            ParseTree tree2 = parser2.root();
-            GetNoteInfo infoGetter2 = new GetNoteInfo();
-            new ParseTreeWalker().walk(infoGetter2, tree2);
-            return infoGetter2.getSingles();
-        } catch(RuntimeException e) {
-            throw new IllegalArgumentException();
-        }
-    }
     
     /**
      * Constructor for Music object
      * @param measures: List of Single objects to be played in the Music
      */
-    public Music(List<Single> singles){
-        this.singles = singles;
+    public Music(List<Voice> voices){
+        this.voices = voices;
         this.infoMap = new HashMap<String,String>();
     }
     
-    public Music(File file) throws IOException {
+    public Music(File file, List<Voice> voices) throws IOException {
         this.infoMap = Music.parseInfo(file);
-        this.singles = Music.parseSingles(file);
+        this.voices =  voices;
     }
     
     /**
@@ -127,10 +97,8 @@ public class Music {
      * @return int duration of piece
      */
     public int getDuration() {
-        int duration = 0;
-        for (Single single: this.singles){
-            duration += single.getDuration();
-        }
+        //According to RI, all voices must have same duration, which is duration of the Music
+        int duration = voices.get(0).getDuration();
         return duration;
     }
     
@@ -138,9 +106,9 @@ public class Music {
      * Returns the list of singles to be played in the measure
      * @return List of measures in the Music object
      */
-    public List<Single> getSingles(){
+    public List<Voice> getVoices(){
         checkRep();
-        return Collections.unmodifiableList(this.singles);
+        return Collections.unmodifiableList(this.voices);
     }
     
     /**
@@ -150,26 +118,26 @@ public class Music {
      */
     public Music transpose(int semitonesUp) {
         checkRep();
-        List<Single> transposedList = new ArrayList<Single>();
-        for(Single single: singles){
-            transposedList.add(single.transpose(semitonesUp));
+        List<Voice> transposedList = new ArrayList<Voice>();
+        for(Voice voice: voices){
+            transposedList.add(voice.transpose(semitonesUp));
         }
         checkRep();
         return new Music(transposedList);
     }
     
     /**
-     * Returns the piece of Music as a String representation of the measures within it
+     * Returns the piece of Music as a String representation of the voices within it
      * @return String representation of Music object
      */
     @Override
     public String toString() {
         checkRep();
         StringBuilder piece = new StringBuilder();
-        for(Single single: singles){
-            piece.append(single.toString());
+        for(Voice voice: voices){
+            piece.append(voice.toString());
+            piece.append("\n");
         }
-        piece.append("|]");
         return piece.toString();
     }
     
@@ -191,12 +159,12 @@ public class Music {
         if(obj instanceof Music){
             Music that = (Music) obj;
             //Have to have same number of measures
-            if(that.getSingles().size() != that.getSingles().size()){
+            if(that.getVoices().size() != that.getVoices().size()){
                 return false;
             }
             //Check for both order and that all measures inside inside are equal
-            for(int i = 0; i < that.getSingles().size(); i++){
-                if(!(this.getSingles().get(i).equals(that.getSingles().get(i)))){
+            for(int i = 0; i < that.getVoices().size(); i++){
+                if(!(this.getVoices().get(i).equals(that.getVoices().get(i)))){
                     return false;
                 }
             }
@@ -209,7 +177,15 @@ public class Music {
      * Assert the Rep Invariant
      */
     private void checkRep(){
+        //-this.getDuration() > 0
         assert this.getDuration() > 0;
+        //-duration of all Voice objects in voices are the same
+        int duration = voices.get(0).getDuration();
+        for(Voice voice: voices){
+            if(voice.getDuration() != duration){
+                assert false;
+            }
+        }
     }
     
     /**
