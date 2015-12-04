@@ -187,9 +187,30 @@ public class Voice {
      * Plays the Singles in this Voice object sequentially
      */
     public void play(){
-        for(int i = 0; i < singles.size(); i++){
-            singles.get(0).play();
+        try {
+            SequencePlayer player = new SequencePlayer(200, 48);
+            int counter = 0;
+            for(Single single : singles){
+                if (single.getType().equals("note")){
+                    player.addNote(((Note) single).getPitch().toMidiNote(), counter, single.getDuration());
+                }
+                else if (single.getType().equals("rest")){
+                    player.addNote(0, counter, single.getDuration());
+                }
+                else{
+                    for (Note note: ((Chord) single).getNotes()){
+                        player.addNote(note.getPitch().toMidiNote(), counter, note.getDuration());
+                    }
+                }
+            }
+        } catch (MidiUnavailableException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (InvalidMidiDataException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
+
     }
     
 }
