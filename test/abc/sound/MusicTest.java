@@ -25,6 +25,46 @@ public class MusicTest {
     
     //toString():
     //-1, 2+ Singles
+    
+    @Test
+    public void testPlay(){
+        List<Single> noteList1 = new ArrayList<Single>();
+        Single note1 = new Note(new Pitch('C'), 192);
+        Single note2 = new Note(new Pitch('F'), 192);
+        Single note3 = new Note(new Pitch('G'), 192);
+        Single note10 = new Note(new Pitch('C'), 192);
+        noteList1.add(note1);
+        noteList1.add(note2);
+        noteList1.add(note3);
+        noteList1.add(note10);
+        Voice voice1 = new Voice(noteList1);
+        List<Single> noteList4 = new ArrayList<Single>();
+        Single note4 = new Note(new Pitch('E'), 192);
+        Single note5 = new Note(new Pitch('A'), 192);
+        Single note6 = new Note(new Pitch('B'), 192);
+        Single note11 = new Note(new Pitch('E'), 192);
+        noteList4.add(note4);
+        noteList4.add(note5);
+        noteList4.add(note6);
+        noteList4.add(note11);
+        Voice voice4 = new Voice(noteList4);
+        List<Single> noteList5 = new ArrayList<Single>();
+        Single note7 = new Note(new Pitch('G'), 192);
+        Single note8 = new Note(new Pitch('C').transpose(Pitch.OCTAVE), 192);
+        Single note9 = new Note(new Pitch('D').transpose(Pitch.OCTAVE), 192);
+        Single note12 = new Note(new Pitch('G'), 192);
+        noteList5.add(note7);
+        noteList5.add(note8);
+        noteList5.add(note9);
+        noteList5.add(note12);
+        Voice voice5 = new Voice(noteList5);
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice1);
+        voiceList.add(voice4);
+        voiceList.add(voice5);
+        Music music = new Music(voiceList);
+        music.play();
+    }
 
     @Test
     public void testGetVoicesMultiple(){
