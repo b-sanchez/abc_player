@@ -1,5 +1,6 @@
 package abc.sound;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -34,269 +35,162 @@ import abc.parser.NoteGrammarParser.TupletelementContext;
 import abc.parser.NoteGrammarParser.TupletspecContext;
 
 public class GetNoteInfo implements NoteGrammarListener {
-    private Stack<List<Single>> stack = new Stack<>();
+    private List<Single> singlesInVoice = new ArrayList<>();
     
     public List<Single> getSingles() {
-        return stack.get(0);
-    }
-    @Override
-    public void enterEveryRule(ParserRuleContext arg0) {
-        // TODO Auto-generated method stub
-        
+        return singlesInVoice;
     }
 
     @Override
-    public void exitEveryRule(ParserRuleContext arg0) {
-        // TODO Auto-generated method stub
-        
+    public void enterEveryRule(ParserRuleContext arg0) { }
+
+    @Override
+    public void exitEveryRule(ParserRuleContext arg0) { }
+
+    @Override
+    public void visitErrorNode(ErrorNode arg0) { }
+
+    @Override
+    public void visitTerminal(TerminalNode arg0) { }
+
+    @Override
+    public void enterPitch(PitchContext ctx) { }
+
+    @Override
+    public void exitPitch(PitchContext ctx) { }
+
+    @Override
+    public void enterRest(RestContext ctx) { }
+
+    @Override
+    public void exitRest(RestContext ctx) { }
+
+    @Override
+    public void enterNote(NoteContext ctx) { 
+        singlesInVoice.add(new Rest(10));
     }
 
     @Override
-    public void visitErrorNode(ErrorNode arg0) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNote(NoteContext ctx) { }
 
     @Override
-    public void visitTerminal(TerminalNode arg0) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterAbcmusic(AbcmusicContext ctx) { }
 
     @Override
-    public void enterPitch(PitchContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitAbcmusic(AbcmusicContext ctx) { }
 
     @Override
-    public void exitPitch(PitchContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterAbcline(AbclineContext ctx) { }
 
     @Override
-    public void enterRest(RestContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitAbcline(AbclineContext ctx) { }
 
     @Override
-    public void exitRest(RestContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterElement(ElementContext ctx) { }
 
     @Override
-    public void enterNote(NoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitElement(ElementContext ctx) { }
 
     @Override
-    public void exitNote(NoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterNoteelement(NoteelementContext ctx) { }
+
     @Override
-    public void enterAbcmusic(AbcmusicContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNoteelement(NoteelementContext ctx) { }
+
     @Override
-    public void exitAbcmusic(AbcmusicContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterNoteorrest(NoteorrestContext ctx) { }
+
     @Override
-    public void enterAbcline(AbclineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNoteorrest(NoteorrestContext ctx) { }
+
     @Override
-    public void exitAbcline(AbclineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterOctave(OctaveContext ctx) { }
+
     @Override
-    public void enterElement(ElementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitOctave(OctaveContext ctx) { }
+
     @Override
-    public void exitElement(ElementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterNotelength(NotelengthContext ctx) { }
+
     @Override
-    public void enterNoteelement(NoteelementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNotelength(NotelengthContext ctx) { }
+
     @Override
-    public void exitNoteelement(NoteelementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterNotelengthstrict(NotelengthstrictContext ctx) { }
+
     @Override
-    public void enterNoteorrest(NoteorrestContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNotelengthstrict(NotelengthstrictContext ctx) { }
+
     @Override
-    public void exitNoteorrest(NoteorrestContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterAccidental(AccidentalContext ctx) { }
+
     @Override
-    public void enterOctave(OctaveContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitAccidental(AccidentalContext ctx) { }
+
     @Override
-    public void exitOctave(OctaveContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterBasenote(BasenoteContext ctx) { }
+
     @Override
-    public void enterNotelength(NotelengthContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitBasenote(BasenoteContext ctx) { }
+
     @Override
-    public void exitNotelength(NotelengthContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterTupletelement(TupletelementContext ctx) { }
+
     @Override
-    public void enterNotelengthstrict(NotelengthstrictContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitTupletelement(TupletelementContext ctx) { }
+
     @Override
-    public void exitNotelengthstrict(NotelengthstrictContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterTupletspec(TupletspecContext ctx) { }
+
     @Override
-    public void enterAccidental(AccidentalContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitTupletspec(TupletspecContext ctx) { }
+
     @Override
-    public void exitAccidental(AccidentalContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterMultinote(MultinoteContext ctx) { }
+
     @Override
-    public void enterBasenote(BasenoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitMultinote(MultinoteContext ctx) { }
+
     @Override
-    public void exitBasenote(BasenoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterBarline(BarlineContext ctx) { }
+
     @Override
-    public void enterTupletelement(TupletelementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitBarline(BarlineContext ctx) { }
+
     @Override
-    public void exitTupletelement(TupletelementContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterNthrepeat(NthrepeatContext ctx) { }
+
     @Override
-    public void enterTupletspec(TupletspecContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitNthrepeat(NthrepeatContext ctx) { }
+
     @Override
-    public void exitTupletspec(TupletspecContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterMidtunefield(MidtunefieldContext ctx) { }
+
     @Override
-    public void enterMultinote(MultinoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitMidtunefield(MidtunefieldContext ctx) { }
+
     @Override
-    public void exitMultinote(MultinoteContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterFieldvoice(FieldvoiceContext ctx) { }
+
     @Override
-    public void enterBarline(BarlineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitFieldvoice(FieldvoiceContext ctx) { }
+
     @Override
-    public void exitBarline(BarlineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterComment(CommentContext ctx) { }
+
     @Override
-    public void enterNthrepeat(NthrepeatContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitComment(CommentContext ctx) { }
+
     @Override
-    public void exitNthrepeat(NthrepeatContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterEndofline(EndoflineContext ctx) { }
+
     @Override
-    public void enterMidtunefield(MidtunefieldContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitEndofline(EndoflineContext ctx) { }
+
     @Override
-    public void exitMidtunefield(MidtunefieldContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void enterAnything(AnythingContext ctx) { }
+
     @Override
-    public void enterFieldvoice(FieldvoiceContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void exitFieldvoice(FieldvoiceContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void enterComment(CommentContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void exitComment(CommentContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void enterEndofline(EndoflineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void exitEndofline(EndoflineContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void enterAnything(AnythingContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
-    @Override
-    public void exitAnything(AnythingContext ctx) {
-        // TODO Auto-generated method stub
-        
-    }
+    public void exitAnything(AnythingContext ctx) { }
 
 }

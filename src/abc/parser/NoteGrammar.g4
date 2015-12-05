@@ -36,7 +36,7 @@ nthrepeat: '['DIGIT;
 midtunefield: fieldvoice;
 fieldvoice: 'V'':' anything endofline;
 
-comment: '%' anything NEWLINE;
+comment: '%' anything? NEWLINE;
 endofline: comment | NEWLINE;
 
 NONBASENOTE: ([H-Z] | [h-y] | ['@' '#' '$' '%' '&' '*' ')' '~' '`' '{' '}' '"' '<' '>' '?' '.' ]);
