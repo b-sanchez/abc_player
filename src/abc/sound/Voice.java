@@ -45,7 +45,7 @@ public class Voice {
      * @throws IllegalArgumentException if the expression is invalid
      */
   
-    public static List<Single> parseSingles(File file) throws IOException {
+    public static List<Single> parseSingles(File file, String name) throws IOException {
         try {
             //String input = "";
             String input2 = "";
@@ -73,7 +73,7 @@ public class Voice {
             lexer2.reportErrorsAsExceptions();
             parser2.reportErrorsAsExceptions();
             ParseTree tree2 = parser2.abcmusic();
-            GetNoteInfo infoGetter2 = new GetNoteInfo();
+            GetNoteInfo infoGetter2 = new GetNoteInfo(name);
             new ParseTreeWalker().walk(infoGetter2, tree2);
             return infoGetter2.getSingles();
         } catch(RuntimeException e) {
@@ -88,7 +88,7 @@ public class Voice {
      */
     public Voice(String name, File file) throws IOException{
         this.name = name;
-        this.singles = Voice.parseSingles(file);
+        this.singles = Voice.parseSingles(file, name);
     }
     
     public Voice(List<Single> singles, String name){

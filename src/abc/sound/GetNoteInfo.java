@@ -35,8 +35,14 @@ import abc.parser.NoteGrammarParser.TupletelementContext;
 import abc.parser.NoteGrammarParser.TupletspecContext;
 
 public class GetNoteInfo implements NoteGrammarListener {
-    private List<Single> singlesInVoice = new ArrayList<>();
+    private final List<Single> singlesInVoice = new ArrayList<>();
     private boolean multipleVoices;
+    private final String nameOfVoice;
+    private String currentVoiceBeingParsed;
+    
+    public GetNoteInfo(String name) {
+        nameOfVoice = name;
+    }
     
     public List<Single> getSingles() {
         return singlesInVoice;
