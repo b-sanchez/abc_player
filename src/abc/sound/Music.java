@@ -24,7 +24,8 @@ import abc.parser.*;
 public class Music {
     
     //Datatype Definition
-    // Music = List<Singles>
+    // Music = List<Voices>
+    // Voices = List<Singles>
 
     
     private final List<Voice> voices;
@@ -34,9 +35,9 @@ public class Music {
     //-this.getDuration() > 0
     //-duration of all Voice objects in voices are the same
     //Abstraction Function AF(value):
-    //-represents a piece of music that contains singles (Rests, Notes, Chords) to be played
+    //-represents a piece of music that contains voices to be played
     //Safety from Rep Exposure:
-    //-singles is List of an immutable type Single, and is private and final (not passed between classes)
+    //-voices is List of immutable Voice objects, which contains immutable Singles, and is private and final (not passed between classes)
     
     /**
      * Parse a Music.
