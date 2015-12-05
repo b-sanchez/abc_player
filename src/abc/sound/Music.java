@@ -206,13 +206,37 @@ public class Music {
      * time step 10 for half the duration of a beat.
      */
     public void play(){
-        for (Voice voice: voices){
+        try {
+            SequencePlayer player = new SequencePlayer(200, 48);
+            for (Voice voice: voices){
+                int counter = 0;
+                for(Single single : voice.getSingles()){
+                    if (single.getType().equals("note")){
+                        player.addNote(((Note) single).getPitch().toMidiNote(), counter, single.getDuration());
+                    }
+                    else if (single.getType().equals("rest")){
+                        player.addNote(0, counter, single.getDuration());
+                    }
+                    else{
+                        for (Note note: ((Chord) single).getNotes()){
+                            player.addNote(note.getPitch().toMidiNote(), counter, note.getDuration());
+                        }
+                    }
+                    counter += single.getDuration();
+                }
+            }
+            System.out.println(player);
+            player.play();
             try {
-                voice.play().play();
-            } catch (MidiUnavailableException e) {
+                System.in.read();
+            } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        } 
+        } catch (MidiUnavailableException | InvalidMidiDataException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 }
