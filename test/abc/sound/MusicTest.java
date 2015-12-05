@@ -37,7 +37,7 @@ public class MusicTest {
         noteList1.add(note2);
         noteList1.add(note3);
         noteList1.add(note10);
-        Voice voice1 = new Voice(noteList1);
+        Voice voice1 = new Voice(noteList1, "voice1");
         List<Single> noteList4 = new ArrayList<Single>();
         Single note4 = new Note(new Pitch('E'), 192);
         Single note5 = new Note(new Pitch('A'), 192);
@@ -47,7 +47,7 @@ public class MusicTest {
         noteList4.add(note5);
         noteList4.add(note6);
         noteList4.add(note11);
-        Voice voice4 = new Voice(noteList4);
+        Voice voice4 = new Voice(noteList4, "voice4");
         List<Single> noteList5 = new ArrayList<Single>();
         Single note7 = new Note(new Pitch('G'), 192);
         Single note8 = new Note(new Pitch('C').transpose(Pitch.OCTAVE), 192);
@@ -57,7 +57,7 @@ public class MusicTest {
         noteList5.add(note8);
         noteList5.add(note9);
         noteList5.add(note12);
-        Voice voice5 = new Voice(noteList5);
+        Voice voice5 = new Voice(noteList5, "voice5");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice1);
         voiceList.add(voice4);
@@ -75,8 +75,8 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
-        Voice voice2 = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
+        Voice voice2 = new Voice(noteList, "voice2");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         voiceList.add(voice2);
@@ -89,7 +89,7 @@ public class MusicTest {
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         Music music = new Music(voiceList);
@@ -105,8 +105,8 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
-        Voice voice2 = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
+        Voice voice2 = new Voice(noteList, "voice2");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         voiceList.add(voice2);
@@ -120,7 +120,7 @@ public class MusicTest {
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         Music music = new Music(voiceList);
@@ -137,7 +137,7 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
@@ -147,7 +147,7 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice2 = new Voice(noteList2);
+        Voice voice2 = new Voice(noteList2, "voice2");
         List<Voice> voiceList2 = new ArrayList<Voice>();
         voiceList2.add(voice2);
         Music music = new Music(voiceList);
@@ -164,7 +164,7 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
@@ -174,7 +174,7 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice2 = new Voice(noteList2);
+        Voice voice2 = new Voice(noteList2, "voice2");
         List<Voice> voiceList2 = new ArrayList<Voice>();
         voiceList2.add(voice2);
         Music music = new Music(voiceList);
@@ -191,7 +191,7 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
@@ -201,7 +201,7 @@ public class MusicTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice2 = new Voice(noteList2);
+        Voice voice2 = new Voice(noteList2, "voice2");
         List<Voice> voiceList2 = new ArrayList<Voice>();
         voiceList2.add(voice2);
         Music music = new Music(voiceList);
@@ -218,7 +218,7 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
@@ -228,7 +228,7 @@ public class MusicTest {
         noteList2.add(note4.transpose(Pitch.OCTAVE));
         noteList2.add(note5.transpose(Pitch.OCTAVE));
         noteList2.add(note6.transpose(Pitch.OCTAVE));
-        Voice voice2 = new Voice(noteList2);
+        Voice voice2 = new Voice(noteList2, "voice2");
         List<Voice> voiceList2 = new ArrayList<Voice>();
         voiceList2.add(voice2);
         Music music = new Music(voiceList);
@@ -245,7 +245,7 @@ public class MusicTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList);
+        Voice voice = new Voice(noteList, "voice");
         List<Voice> voiceList = new ArrayList<Voice>();
         voiceList.add(voice);
         List<Single> noteList2 = new ArrayList<Single>();
@@ -255,7 +255,7 @@ public class MusicTest {
         noteList2.add(note4.transpose(-Pitch.OCTAVE));
         noteList2.add(note5.transpose(-Pitch.OCTAVE));
         noteList2.add(note6.transpose(-Pitch.OCTAVE));
-        Voice voice2 = new Voice(noteList2);
+        Voice voice2 = new Voice(noteList2, "voice2");
         List<Voice> voiceList2 = new ArrayList<Voice>();
         voiceList2.add(voice2);
         Music music = new Music(voiceList);
