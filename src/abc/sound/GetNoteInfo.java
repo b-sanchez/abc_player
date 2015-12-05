@@ -36,6 +36,7 @@ import abc.parser.NoteGrammarParser.TupletspecContext;
 
 public class GetNoteInfo implements NoteGrammarListener {
     private List<Single> singlesInVoice = new ArrayList<>();
+    private boolean multipleVoices;
     
     public List<Single> getSingles() {
         return singlesInVoice;
@@ -74,7 +75,15 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void exitNote(NoteContext ctx) { }
 
     @Override
-    public void enterAbcmusic(AbcmusicContext ctx) { }
+    public void enterAbcmusic(AbcmusicContext ctx) { 
+        if(ctx.abcline(0).getText().charAt(0)=='V') {
+            multipleVoices = true;
+        }
+        else {
+            multipleVoices = false;
+        }
+        System.out.println(multipleVoices);
+    }
 
     @Override
     public void exitAbcmusic(AbcmusicContext ctx) { }

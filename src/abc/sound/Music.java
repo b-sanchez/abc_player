@@ -87,8 +87,17 @@ public class Music {
         this.infoMap = new HashMap<String,String>();
     }
     
-    public Music(File file, List<Voice> voices) throws IOException {
+    public Music(File file) throws IOException {
         this.infoMap = Music.parseInfo(file);
+        List<Voice> voices = new ArrayList<>();
+        for(String thing: this.infoMap.keySet()) {
+            if(thing.charAt(0)=='V') {
+                voices.add(new Voice(infoMap.get(thing), file));
+            }
+            if(voices.isEmpty()) {
+                voices.add(new Voice("only", file));
+            }
+        }
         this.voices =  voices;
     }
     

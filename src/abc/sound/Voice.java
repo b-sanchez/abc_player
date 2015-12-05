@@ -28,7 +28,7 @@ import abc.parser.NoteGrammarParser;
 public class Voice {
     
 
-    
+    private final String name;
     private final List<Single> singles;
 
 
@@ -56,7 +56,9 @@ public class Voice {
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
                 if(stop) {
-                    input2+=line+'\r'+'\n';
+                    if(!line.equals("")) {
+                        input2+=line+'\r'+'\n';
+                    }
                 }
                 else {
                     input+= line+'\r'+'\n';
@@ -86,13 +88,16 @@ public class Voice {
     /**
      * Constructor for Voice object
      * @param measures: List of Single objects to be played in the Voice
+     * @throws IOException 
      */
-    public Voice(List<Single> singles){
-        this.singles = singles;
+    public Voice(String name, File file) throws IOException{
+        this.name = name;
+        this.singles = Voice.parseSingles(file);
     }
     
-    public Voice(File file) throws IOException {
-        this.singles = Voice.parseSingles(file);
+    public Voice(List<Single> singles, String name){
+        this.singles = singles;
+        this.name = name;
     }
     
     /**

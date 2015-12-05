@@ -34,7 +34,7 @@ barline: '|' | ('|''|') | ('[''|') | ('|'']') | (':''|') | ('|'':');
 nthrepeat: '['DIGIT;
 
 midtunefield: fieldvoice;
-fieldvoice: 'V'':' anything endofline;
+fieldvoice: 'V'':' WHITESPACE? anything endofline;
 
 comment: '%' anything? NEWLINE;
 endofline: comment | NEWLINE;
