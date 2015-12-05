@@ -188,7 +188,7 @@ public class Voice {
     /**
      * Plays the Singles in this Voice object sequentially
      */
-    public void play(){
+    public SequencePlayer play(){
         try {
             SequencePlayer player = new SequencePlayer(200, 48);
             int counter = 0;
@@ -204,7 +204,9 @@ public class Voice {
                         player.addNote(note.getPitch().toMidiNote(), counter, note.getDuration());
                     }
                 }
+                counter += single.getDuration();
             }
+            return player;
         } catch (MidiUnavailableException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -212,6 +214,7 @@ public class Voice {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return null;
 
     }
     

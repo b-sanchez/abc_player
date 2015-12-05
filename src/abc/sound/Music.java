@@ -196,23 +196,13 @@ public class Music {
      * time step 10 for half the duration of a beat.
      */
     public void play(){
-        try {
-            SequencePlayer player = new SequencePlayer(140, 12);
-    
-        System.out.println(player);
-
-        // play!
-        player.play();
-        
-        try {
-            System.in.read();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        } catch (MidiUnavailableException mue) {
-            mue.printStackTrace();
-        } catch (InvalidMidiDataException imde) {
-            imde.printStackTrace();
-        }
+        for (Voice voice: voices){
+            try {
+                voice.play().play();
+            } catch (MidiUnavailableException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        } 
     }
 }
