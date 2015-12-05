@@ -6,9 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.sound.midi.InvalidMidiDataException;
 import javax.sound.midi.MidiUnavailableException;
@@ -20,8 +18,6 @@ import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-import abc.parser.HeadingGrammarLexer;
-import abc.parser.HeadingGrammarParser;
 import abc.parser.NoteGrammarLexer;
 import abc.parser.NoteGrammarParser;
 
@@ -51,7 +47,7 @@ public class Voice {
   
     public static List<Single> parseSingles(File file) throws IOException {
         try {
-            String input = "";
+            //String input = "";
             String input2 = "";
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
@@ -61,7 +57,7 @@ public class Voice {
                     }
                 }
                 else {
-                    input+= line+'\r'+'\n';
+                    //input+= line+'\r'+'\n';
                     if(line.charAt(0)=='K') {
                         stop=true;
                     }
@@ -113,6 +109,14 @@ public class Voice {
     }
     
     /**
+     * Returns the name of the voice
+     * @return String name of the voice
+     */
+    public String getName(){
+        return this.name;
+    }
+    
+    /**
      * Returns the list of singles to be played in the measure
      * @return List of measures in the Music object
      */
@@ -133,7 +137,7 @@ public class Voice {
             transposedList.add(single.transpose(semitonesUp));
         }
         checkRep();
-        return new Voice(transposedList);
+        return new Voice(transposedList, this.getName());
     }
     
     /**
@@ -169,7 +173,7 @@ public class Voice {
         if(obj instanceof Voice){
             Voice that = (Voice) obj;
             //Have to have same number of measures
-            if(that.getSingles().size() != that.getSingles().size()){
+            if(this.getSingles().size() != that.getSingles().size()){
                 return false;
             }
             //Check for both order and that all measures inside inside are equal
@@ -177,6 +181,10 @@ public class Voice {
                 if(!(this.getSingles().get(i).equals(that.getSingles().get(i)))){
                     return false;
                 }
+            }
+            
+            if(!this.getName().equals(that.getName())){
+                return false;
             }
             return true;
         }
