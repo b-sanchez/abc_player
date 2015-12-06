@@ -1,6 +1,7 @@
 package abc.sound;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,7 @@ public class GetNoteInfo implements NoteGrammarListener {
     private List<Single> notesInElement = new ArrayList<>();
     private final int TICKS_PER_BEAT = 48;
     private boolean isInTupletElement;
+    private Map<String,Integer> accidentalMap = new HashMap<>();
     
     public GetNoteInfo(String name) {
         nameOfVoice = name;
@@ -82,7 +84,6 @@ public class GetNoteInfo implements NoteGrammarListener {
 
     @Override
     public void exitNote(NoteContext ctx) { 
-//        System.out.println(ctx.noteorrest().pitch().getText());
         if(currentVoiceBeingParsed.equals(nameOfVoice) || !multipleVoices) {
             int duration;
             if(ctx.notelength().getText().equals("")) {
@@ -106,7 +107,6 @@ public class GetNoteInfo implements NoteGrammarListener {
             }
             
             if(ctx.noteorrest().pitch() != null) {
-                System.out.println(ctx.noteorrest().pitch().getText());
                 //First check if lowercase
                 Pitch basenote;
                 if(Character.isLowerCase(ctx.noteorrest().pitch().basenote().getText().charAt(0))) {
@@ -118,23 +118,36 @@ public class GetNoteInfo implements NoteGrammarListener {
                 } 
                 Pitch pitchAfterAccidentalParse;
                 Pitch pitchAfterAll;
-                if(ctx.noteorrest().pitch().accidental()==null) {
+                String mapKey1 = ctx.noteorrest().pitch().basenote().getText();
+                String mapKey = mapKey1;
+                if(ctx.noteorrest().pitch().octave()!=null) {
+                    mapKey = mapKey1 + ctx.noteorrest().pitch().octave().getText();
+                }
+                if(ctx.noteorrest().pitch().accidental()==null && !this.accidentalMap.containsKey(mapKey)) {
                     pitchAfterAccidentalParse = basenote;
+                } 
+                else if(ctx.noteorrest().pitch().accidental()==null){
+                    pitchAfterAccidentalParse = basenote.transpose(this.accidentalMap.get(mapKey));
                 }
-                else if(ctx.noteorrest().pitch().accidental().getText().equals("^")) {
+                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==1) || ctx.noteorrest().pitch().accidental().getText().equals("^")) {
                     pitchAfterAccidentalParse = basenote.transpose(1);
+                    accidentalMap.put(mapKey, 1);
                 }
-                else if(ctx.noteorrest().pitch().accidental().getText().equals("__")) {
+                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-2) || ctx.noteorrest().pitch().accidental().getText().equals("__")) {
                     pitchAfterAccidentalParse = basenote.transpose(-2);
+                    accidentalMap.put(mapKey, -2);
                 }
-                else if(ctx.noteorrest().pitch().accidental().getText().equals("_")) {
+                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-1) || ctx.noteorrest().pitch().accidental().getText().equals("_")) {
                     pitchAfterAccidentalParse = basenote.transpose(-1);
+                    accidentalMap.put(mapKey, -1);
                 }
                 else if(ctx.noteorrest().pitch().accidental().getText().equals("=")) {
-                    pitchAfterAccidentalParse = basenote; //TODO
+                    pitchAfterAccidentalParse = basenote;
+                    accidentalMap.put(mapKey, 0);
                 }
                 else {
-                    pitchAfterAccidentalParse = basenote.transpose(2);
+                    pitchAfterAccidentalParse = basenote.transpose(2); //If ^^
+                    accidentalMap.put(mapKey, 2);
                 }
                 if(ctx.noteorrest().pitch().octave()==null) {
                     pitchAfterAll = pitchAfterAccidentalParse;
@@ -152,6 +165,7 @@ public class GetNoteInfo implements NoteGrammarListener {
             }
         }
     }
+    
 
     @Override
     public void enterAbcmusic(AbcmusicContext ctx) { 
@@ -166,7 +180,7 @@ public class GetNoteInfo implements NoteGrammarListener {
     }
 
     @Override
-    public void exitAbcmusic(AbcmusicContext ctx) { System.out.println("lol");}
+    public void exitAbcmusic(AbcmusicContext ctx) { }
 
     @Override
     public void enterAbcline(AbclineContext ctx) { }
@@ -288,7 +302,9 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void enterBarline(BarlineContext ctx) { }
 
     @Override
-    public void exitBarline(BarlineContext ctx) { }
+    public void exitBarline(BarlineContext ctx) { 
+        this.accidentalMap.clear();
+    }
 
     @Override
     public void enterNthrepeat(NthrepeatContext ctx) { }
@@ -305,7 +321,6 @@ public class GetNoteInfo implements NoteGrammarListener {
     @Override
     public void enterFieldvoice(FieldvoiceContext ctx) { 
         currentVoiceBeingParsed = ctx.anything().getText();
-        System.out.println(currentVoiceBeingParsed);
     }
 
     @Override
