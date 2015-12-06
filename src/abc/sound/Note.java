@@ -1,10 +1,5 @@
 package abc.sound;
 
-import java.io.IOException;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiUnavailableException;
-
 public class Note implements Single {
     
     private final Pitch pitch;
@@ -38,6 +33,7 @@ public class Note implements Single {
     @Override
     public Single transpose(int semitonesUp) {
         checkRep();
+        //Base step for transposition -- use Pitch's transpose function to transpose this Note object
         return new Note(this.pitch.transpose(semitonesUp), this.duration);
     }
 

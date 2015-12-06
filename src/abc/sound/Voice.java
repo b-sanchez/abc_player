@@ -101,6 +101,7 @@ public class Voice {
      * @return int duration of piece
      */
     public int getDuration() {
+        //Duration of voice is the sum of all of the durations of the singles in it
         int duration = 0;
         for (Single single: this.singles){
             duration += single.getDuration();
@@ -141,7 +142,7 @@ public class Voice {
     }
     
     /**
-     * Returns the voice as a String representation of the measures within it
+     * Returns the Voice as a String representation of the Singles within it
      * @return String representation of Voice object
      */
     @Override

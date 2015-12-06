@@ -1,15 +1,9 @@
 package abc.sound;
 
-import java.io.IOException;
-
-
 import java.util.Collections;
 import java.util.HashSet;
 
 import java.util.Set;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiUnavailableException;
 
 public class Chord implements Single {
     
@@ -34,6 +28,7 @@ public class Chord implements Single {
     
     @Override
     public int getDuration() {
+        //Duration of the Chord is simply the duration of the longest chord
         int longestDuration = 0;
         for (Note note: this.notes){
             if (note.getDuration() > longestDuration){
@@ -49,6 +44,7 @@ public class Chord implements Single {
      */
     public Set<Note> getNotes(){
         checkRep();
+        //Immutability
         return Collections.unmodifiableSet(this.notes);
     }
     
@@ -56,6 +52,7 @@ public class Chord implements Single {
     public Chord transpose(int semitonesUp) {
         checkRep();
         Set<Note> transposedSet = new HashSet<Note>();
+        //Transpose each of the notes in the chord up
         for(Note note: notes){
             transposedSet.add((Note) note.transpose(semitonesUp));
         }

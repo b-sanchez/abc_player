@@ -1,10 +1,5 @@
 package abc.sound;
 
-import java.io.IOException;
-
-import javax.sound.midi.InvalidMidiDataException;
-import javax.sound.midi.MidiUnavailableException;
-
 public class Rest implements Single {
     
     private final int duration;
@@ -33,6 +28,7 @@ public class Rest implements Single {
     @Override
     public Single transpose(int semitonesUp) {
         checkRep();
+        //Nothing to transpose
         return this;
     }
 
