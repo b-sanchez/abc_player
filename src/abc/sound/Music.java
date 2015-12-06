@@ -95,11 +95,14 @@ public class Music {
             if(thing.charAt(0)=='V') {
                 voices.add(new Voice(infoMap.get(thing), file));
             }
-            if(voices.isEmpty()) {
-                voices.add(new Voice("only", file));
-            }
+        }
+        if(voices.isEmpty()) {
+            voices.add(new Voice("only", file));
         }
         this.voices =  voices;
+        for(Voice voice: this.voices) {
+            System.out.println("LOOK AT ME " + voice.getName().toString());
+        }
     }
     
     /**

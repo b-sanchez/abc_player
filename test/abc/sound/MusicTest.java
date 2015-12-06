@@ -2,6 +2,8 @@ package abc.sound;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -35,6 +37,11 @@ public class MusicTest {
     
     //TEST NAMES DESCRIBE TESTS
     
+    @Test
+    public void testEverything() throws IOException {
+        Music music = new Music(new File("sample_abc/piece2.abc"));
+        music.play();
+    }
     @Test
     public void testPlaySingleVoiceNoRests(){
         List<Single> noteList1 = new ArrayList<Single>();

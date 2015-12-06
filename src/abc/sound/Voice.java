@@ -89,6 +89,8 @@ public class Voice {
     public Voice(String name, File file) throws IOException{
         this.name = name;
         this.singles = Voice.parseSingles(file, name);
+        System.out.println("HELLO" + this.singles.toString());
+        checkRep();
     }
     
     public Voice(List<Single> singles, String name){
