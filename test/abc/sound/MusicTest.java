@@ -34,6 +34,7 @@ public class MusicTest {
     //-Voice with chords
     
     //TEST NAMES DESCRIBE TESTS
+    
     @Test
     public void testPlaySingleVoiceNoRests(){
         List<Single> noteList1 = new ArrayList<Single>();
