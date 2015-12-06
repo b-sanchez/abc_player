@@ -1,8 +1,10 @@
 package abc.sound;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Stack;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -39,6 +41,9 @@ public class GetNoteInfo implements NoteGrammarListener {
     private boolean multipleVoices;
     private final String nameOfVoice;
     private String currentVoiceBeingParsed;
+    private List<Single> notesInElement = new ArrayList<>();
+    private final int TICKS_PER_BEAT = 48;
+    private boolean isInTupletElement;
     
     public GetNoteInfo(String name) {
         nameOfVoice = name;
@@ -73,12 +78,80 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void exitRest(RestContext ctx) { }
 
     @Override
-    public void enterNote(NoteContext ctx) { 
-        singlesInVoice.add(new Rest(10));
-    }
+    public void enterNote(NoteContext ctx) { }
 
     @Override
-    public void exitNote(NoteContext ctx) { }
+    public void exitNote(NoteContext ctx) { 
+//        System.out.println(ctx.noteorrest().pitch().getText());
+        if(currentVoiceBeingParsed.equals(nameOfVoice) || !multipleVoices) {
+            int duration;
+            if(ctx.notelength().getText().equals("")) {
+                duration = TICKS_PER_BEAT;
+            }
+            else if(ctx.notelength().getText().equals("/")) {
+                duration = 24;
+            }
+            else if(ctx.notelength().getText().charAt(0)=='/') {
+                duration = TICKS_PER_BEAT/Integer.parseInt(ctx.notelength().getText().substring(1));
+            }
+            else if(ctx.notelength().getText().charAt(ctx.notelength().getText().length()-1)=='/') {
+                duration = TICKS_PER_BEAT*Integer.parseInt(ctx.notelength().getText().substring(0,ctx.notelength().getText().length()-1))/2;
+            }
+            else if(ctx.notelength().getText().indexOf('/')!=-1) {
+                int indexOfSlash = ctx.notelength().getText().indexOf('/');
+                duration = TICKS_PER_BEAT*Integer.parseInt(ctx.notelength().getText().substring(0, indexOfSlash))/Integer.parseInt(ctx.notelength().getText().substring(indexOfSlash+1));
+            }
+            else {
+                duration = TICKS_PER_BEAT*Integer.parseInt(ctx.notelength().getText());
+            }
+            
+            if(ctx.noteorrest().pitch() != null) {
+                System.out.println(ctx.noteorrest().pitch().getText());
+                //First check if lowercase
+                Pitch basenote;
+                if(Character.isLowerCase(ctx.noteorrest().pitch().basenote().getText().charAt(0))) {
+                    basenote = new Pitch(Character.toUpperCase(ctx.noteorrest().pitch().basenote().getText().charAt(0)));
+                    basenote = basenote.transpose(Pitch.OCTAVE);
+                }
+                else {
+                    basenote = new Pitch(ctx.noteorrest().pitch().basenote().getText().charAt(0));
+                } 
+                Pitch pitchAfterAccidentalParse;
+                Pitch pitchAfterAll;
+                if(ctx.noteorrest().pitch().accidental()==null) {
+                    pitchAfterAccidentalParse = basenote;
+                }
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("^")) {
+                    pitchAfterAccidentalParse = basenote.transpose(1);
+                }
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("__")) {
+                    pitchAfterAccidentalParse = basenote.transpose(-2);
+                }
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("_")) {
+                    pitchAfterAccidentalParse = basenote.transpose(-1);
+                }
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("=")) {
+                    pitchAfterAccidentalParse = basenote; //TODO
+                }
+                else {
+                    pitchAfterAccidentalParse = basenote.transpose(2);
+                }
+                if(ctx.noteorrest().pitch().octave()==null) {
+                    pitchAfterAll = pitchAfterAccidentalParse;
+                }
+                else if(ctx.noteorrest().pitch().octave().getText().charAt(0)==(',')) {
+                    pitchAfterAll = pitchAfterAccidentalParse.transpose(-Pitch.OCTAVE*ctx.noteorrest().pitch().octave().getText().length());
+                }
+                else {
+                    pitchAfterAll = pitchAfterAccidentalParse.transpose(Pitch.OCTAVE*ctx.noteorrest().pitch().octave().getText().length());
+                }
+                notesInElement.add(new Note(pitchAfterAll, duration));
+            }
+            else {
+                notesInElement.add(new Rest(duration));
+            }
+        }
+    }
 
     @Override
     public void enterAbcmusic(AbcmusicContext ctx) { 
@@ -87,12 +160,13 @@ public class GetNoteInfo implements NoteGrammarListener {
         }
         else {
             multipleVoices = false;
+            currentVoiceBeingParsed = "only";
         }
-        System.out.println(multipleVoices);
+        isInTupletElement = false;
     }
 
     @Override
-    public void exitAbcmusic(AbcmusicContext ctx) { }
+    public void exitAbcmusic(AbcmusicContext ctx) { System.out.println("lol");}
 
     @Override
     public void enterAbcline(AbclineContext ctx) { }
@@ -110,7 +184,23 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void enterNoteelement(NoteelementContext ctx) { }
 
     @Override
-    public void exitNoteelement(NoteelementContext ctx) { }
+    public void exitNoteelement(NoteelementContext ctx) { 
+        if(!isInTupletElement) {
+            if(currentVoiceBeingParsed.equals(nameOfVoice) || !multipleVoices) {
+                if(notesInElement.size()==1) {
+                    singlesInVoice.add(notesInElement.get(0));
+                }
+                else {
+                    Set<Note> notes = new HashSet<>();
+                    for(Single note: notesInElement) {
+                        notes.add((Note)note);
+                    }
+                    singlesInVoice.add(new Chord(notes));
+                }
+                notesInElement = new ArrayList<>();
+            }
+        }
+    }
 
     @Override
     public void enterNoteorrest(NoteorrestContext ctx) { }
@@ -149,11 +239,39 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void exitBasenote(BasenoteContext ctx) { }
 
     @Override
-    public void enterTupletelement(TupletelementContext ctx) { }
+    public void enterTupletelement(TupletelementContext ctx) { 
+        isInTupletElement = true;
+    }
 
     @Override
-    public void exitTupletelement(TupletelementContext ctx) { }
-
+    public void exitTupletelement(TupletelementContext ctx) { 
+        for(Single single: notesInElement) {
+            if(single.getType().equals("rest")) {
+                singlesInVoice.add(new Rest(scaleDurationToTuplet(single.getDuration(), ctx)));
+            }
+            else if(single.getType().equals("note")) {
+                singlesInVoice.add(new Note(((Note)single).getPitch(), scaleDurationToTuplet(single.getDuration(), ctx)));
+            }
+            else {
+                for(Note note: ((Chord)single).getNotes()) {
+                    singlesInVoice.add(new Note(((Note)note).getPitch(), scaleDurationToTuplet(note.getDuration(), ctx)));
+                }
+            }
+        }
+        notesInElement = new ArrayList<>();
+        isInTupletElement = false;
+    }
+    
+    public static int scaleDurationToTuplet(int duration, TupletelementContext ctx) {
+        if(ctx.tupletspec().getText().charAt(1)==2) {
+            return duration*3/2;
+        }
+        else if(ctx.tupletspec().getText().charAt(1)==3) {
+            return duration*2/3;
+        }
+        return duration*3/4;
+    }
+    
     @Override
     public void enterTupletspec(TupletspecContext ctx) { }
 
@@ -185,7 +303,10 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void exitMidtunefield(MidtunefieldContext ctx) { }
 
     @Override
-    public void enterFieldvoice(FieldvoiceContext ctx) { }
+    public void enterFieldvoice(FieldvoiceContext ctx) { 
+        currentVoiceBeingParsed = ctx.anything().getText();
+        System.out.println(currentVoiceBeingParsed);
+    }
 
     @Override
     public void exitFieldvoice(FieldvoiceContext ctx) { }
