@@ -183,9 +183,6 @@ public class Voice {
                 }
             }
             
-            if(!this.getName().equals(that.getName())){
-                return false;
-            }
             return true;
         }
         return false;
