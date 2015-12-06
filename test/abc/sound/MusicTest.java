@@ -3,7 +3,9 @@ package abc.sound;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -26,8 +28,105 @@ public class MusicTest {
     //toString():
     //-1, 2+ Singles
     
+    //play():
+    //-Single voice, multiple voices
+    //-Voice with rest/without rest
+    //-Voice with chords
+    
+    //TEST NAMES DESCRIBE TESTS
     @Test
-    public void testPlay(){
+    public void testPlaySingleVoiceNoRests(){
+        List<Single> noteList1 = new ArrayList<Single>();
+        Single note1 = new Note(new Pitch('C'), 192);
+        Single note2 = new Note(new Pitch('F'), 192);
+        Single note3 = new Note(new Pitch('G'), 192);
+        Single note10 = new Note(new Pitch('F'), 192);
+        noteList1.add(note1);
+        noteList1.add(note2);
+        noteList1.add(note3);
+        noteList1.add(note10);
+        Voice voice1 = new Voice(noteList1, "voice1");
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice1);
+        Music music = new Music(voiceList);
+        music.play();
+    }
+    
+    @Test
+    public void testPlaySingleVoiceWithRests(){
+        List<Single> noteList1 = new ArrayList<Single>();
+        Single note1 = new Note(new Pitch('C'), 192);
+        Single note2 = new Note(new Pitch('F'), 192);
+        Single note3 = new Note(new Pitch('G'), 192);
+        Single rest = new Rest(192);
+        Single note10 = new Note(new Pitch('F'), 192);
+        noteList1.add(note1);
+        noteList1.add(note2);
+        noteList1.add(note3);
+        noteList1.add(rest);
+        noteList1.add(note10);
+        Voice voice1 = new Voice(noteList1, "voice1");
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice1);
+        Music music = new Music(voiceList);
+        music.play();
+    }
+    
+    @Test
+    public void testPlayVoiceWithChords(){
+        List<Single> singlesList = new ArrayList<Single>();
+        Set<Note> chordList1 = new HashSet<Note>();
+        Single note1 = new Note(new Pitch('C'), 192);
+        Single note2 = new Note(new Pitch('E'), 192);
+        Single note3 = new Note(new Pitch('G'), 192);
+        chordList1.add((Note) note1);
+        chordList1.add((Note) note2);
+        chordList1.add((Note) note3);
+        Single chord1 = new Chord(chordList1);
+        
+        Set<Note> chordList2 = new HashSet<Note>();
+        Single note4 = new Note(new Pitch('F'), 192);
+        Single note5 = new Note(new Pitch('A'), 192);
+        Single note6 = new Note(new Pitch('C').transpose(Pitch.OCTAVE), 192);
+        chordList2.add((Note)note4);
+        chordList2.add((Note)note5);
+        chordList2.add((Note)note6);
+        Single chord2 = new Chord(chordList2);
+        
+        Set<Note> chordList3 = new HashSet<Note>();
+        Single note7 = new Note(new Pitch('G'), 192);
+        Single note8 = new Note(new Pitch('B'), 192);
+        Single note9 = new Note(new Pitch('D').transpose(Pitch.OCTAVE), 192);
+        chordList3.add((Note)note7);
+        chordList3.add((Note)note8);
+        chordList3.add((Note)note9);
+        Single chord3 = new Chord(chordList3);
+        
+        Set<Note> chordList4 = new HashSet<Note>();
+        Single note10 = new Note(new Pitch('C'), 192);
+        Single note11 = new Note(new Pitch('E'), 192);
+        Single note12 = new Note(new Pitch('G'), 192);
+        Single note13 = new Note(new Pitch('C').transpose(Pitch.OCTAVE), 192);
+        chordList4.add((Note)note10);
+        chordList4.add((Note)note11);
+        chordList4.add((Note)note12);
+        chordList4.add((Note)note13);
+        Single chord4 = new Chord(chordList4);
+        
+        singlesList.add(chord1);
+        singlesList.add(chord2);
+        singlesList.add(chord3);
+        singlesList.add(chord4);
+        
+        Voice voice1 = new Voice(singlesList, "voice1");
+        List<Voice> voiceList = new ArrayList<Voice>();
+        voiceList.add(voice1);
+        Music music = new Music(voiceList);
+        music.play();
+    }
+    
+    @Test
+    public void testPlayMultipleVoices(){
         List<Single> noteList1 = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 192);
         Single note2 = new Note(new Pitch('F'), 192);
