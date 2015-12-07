@@ -581,15 +581,15 @@ public class GetNoteInfo implements NoteGrammarListener {
                 else if(ctx.noteorrest().pitch().accidental()==null){
                     pitchAfterAccidentalParse = basenote.transpose(this.accidentalMap.get(mapKey));
                 }
-                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==1) || ctx.noteorrest().pitch().accidental().getText().equals("^")) {
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("^")) {
                     pitchAfterAccidentalParse = basenote.transpose(1);
                     accidentalMap.put(mapKey, 1);
                 }
-                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-2) || ctx.noteorrest().pitch().accidental().getText().equals("__")) {
+                else if((ctx.noteorrest().pitch().accidental().getText().equals("__"))) {
                     pitchAfterAccidentalParse = basenote.transpose(-2);
                     accidentalMap.put(mapKey, -2);
                 }
-                else if((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-1) || ctx.noteorrest().pitch().accidental().getText().equals("_")) {
+                else if((ctx.noteorrest().pitch().accidental().getText().equals("_"))) {
                     pitchAfterAccidentalParse = basenote.transpose(-1);
                     accidentalMap.put(mapKey, -1);
                 }
@@ -598,9 +598,24 @@ public class GetNoteInfo implements NoteGrammarListener {
                     pitchAfterAccidentalParse = basenote;
                     accidentalMap.put(mapKey, 0);
                 }
-                else {
+                else if(ctx.noteorrest().pitch().accidental().getText().equals("^^")) {
                     pitchAfterAccidentalParse = basenote.transpose(2); //If ^^
                     accidentalMap.put(mapKey, 2);
+                }
+                else if ((this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==1)){
+                    pitchAfterAccidentalParse = basenote.transpose(1);
+                }
+                else if (this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-2){
+                    pitchAfterAccidentalParse = basenote.transpose(-2);
+                }
+                else if (this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==-1){
+                    pitchAfterAccidentalParse = basenote.transpose(-1);
+                }
+                else if (this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==2){
+                    pitchAfterAccidentalParse = basenote.transpose(2);
+                }
+                else{
+                    pitchAfterAccidentalParse = basenote;
                 }
                 if(ctx.noteorrest().pitch().octave()==null) {
                     pitchAfterAll = pitchAfterAccidentalParse;
