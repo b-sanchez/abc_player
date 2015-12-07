@@ -210,30 +210,45 @@ public class Music {
      */
     public void play(){
         int tempo = 100;
+        if(this.infoMap.containsKey("L")){
+            if (this.infoMap.get("L").contains("/")){
+                tempo = tempo / 4;
+                tempo = tempo * Integer.parseInt(this.infoMap.get("L").substring(2));
+            }
+            else{
+                tempo = tempo / Integer.parseInt(this.infoMap.get("L"));
+            } 
+        }
         try {
             if(this.infoMap.containsKey("Q")){
                 tempo = Integer.parseInt(this.infoMap.get("Q").split("=")[1]);
                 if (this.infoMap.get("Q").split("=")[0].contains("/")){
-                    tempo = tempo * 8;
+                    tempo = tempo * 4;
                     tempo = tempo / Integer.parseInt(this.infoMap.get("Q").split("=")[0].substring(2));
                 }
                 else{
-                    tempo = tempo * Integer.parseInt(this.infoMap.get("Q").split("=")[0]) * 8;
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("Q").split("=")[0]);
                 }
             }
             else if(this.infoMap.containsKey("L")){
                 if (this.infoMap.get("L").contains("/")){
-                    tempo = tempo * 8;
+                    tempo = tempo * 4;
                     tempo = tempo / Integer.parseInt(this.infoMap.get("L").substring(2));
                 }
                 else{
-                    tempo = tempo * Integer.parseInt(this.infoMap.get("L")) * 8;
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("L"));
                 } 
             }
             else if(this.infoMap.containsKey("M")){
-                if (!(Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75)){
+                if (Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75){
                     tempo = tempo / 2; 
                 }
+                else{
+                    tempo = tempo / 4;
+                }
+            }
+            else{
+                tempo = tempo / 2;
             }
             
             SequencePlayer player = new SequencePlayer(tempo, 48);
