@@ -594,6 +594,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     accidentalMap.put(mapKey, -1);
                 }
                 else if(ctx.noteorrest().pitch().accidental().getText().equals("=")) {
+                    System.out.println("THIS IS YOUR NOTE " + ctx.noteorrest().pitch().getText());
                     pitchAfterAccidentalParse = basenote;
                     accidentalMap.put(mapKey, 0);
                 }

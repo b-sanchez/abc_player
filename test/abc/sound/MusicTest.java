@@ -39,7 +39,7 @@ public class MusicTest {
     
     @Test
     public void testEverything() throws IOException {
-        Music music = new Music(new File("sample_abc/invention.abc"));
+        Music music = new Music(new File("sample_abc/fur_elise.abc"));
         music.play();
     }
     @Test
