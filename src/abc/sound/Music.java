@@ -218,7 +218,7 @@ public class Music {
                     tempo = tempo / Integer.parseInt(this.infoMap.get("Q").split("=")[0].substring(2));
                 }
                 else{
-                    tempo = tempo * Integer.parseInt(this.infoMap.get("Q").split("=")[0]);
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("Q").split("=")[0]) * 8;
                 }
             }
             else if(this.infoMap.containsKey("L")){
@@ -227,19 +227,13 @@ public class Music {
                     tempo = tempo / Integer.parseInt(this.infoMap.get("L").substring(2));
                 }
                 else{
-                    tempo = tempo * Integer.parseInt(this.infoMap.get("L"));
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("L")) * 8;
                 } 
             }
             else if(this.infoMap.containsKey("M")){
-                if (Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75){
-                    tempo = tempo / 1; 
+                if (!(Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75)){
+                    tempo = tempo / 2; 
                 }
-                else{
-                    tempo = tempo / 2;
-                }
-            }
-            else{
-                tempo = tempo / 1;
             }
             
             SequencePlayer player = new SequencePlayer(tempo, 48);
