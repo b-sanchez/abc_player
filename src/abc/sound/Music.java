@@ -93,11 +93,11 @@ public class Music {
         List<Voice> voices = new ArrayList<>();
         for(String thing: this.infoMap.keySet()) {
             if(thing.charAt(0)=='V') {
-                voices.add(new Voice(infoMap.get(thing), file));
+                voices.add(new Voice(infoMap.get(thing), file, this.infoMap.get("K")));
             }
         }
         if(voices.isEmpty()) {
-            voices.add(new Voice("only", file));
+            voices.add(new Voice("only", file, this.infoMap.get("K")));
         }
         this.voices =  voices;
         for(Voice voice: this.voices) {

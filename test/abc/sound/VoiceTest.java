@@ -30,7 +30,7 @@ public class VoiceTest {
     
     @Test
     public void testInfoGetter() throws IOException {
-        System.out.println(Voice.parseSingles(new File("sample_abc/invention.abc"), "1"));
+        System.out.println(Voice.parseSingles(new File("sample_abc/invention.abc"), "1", "C"));
     }
     
     @Test
@@ -42,7 +42,7 @@ public class VoiceTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList, "voice");
+        Voice voice = new Voice(noteList, "voice", "C");
         assertEquals(noteList, voice.getSingles());
     }
     
@@ -51,7 +51,7 @@ public class VoiceTest {
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Voice voice = new Voice(noteList, "voice");
+        Voice voice = new Voice(noteList, "voice", "C");
         assertEquals(noteList, voice.getSingles());
     }
     
@@ -64,7 +64,7 @@ public class VoiceTest {
         noteList.add(note1);
         noteList.add(note2);
         noteList.add(note3);
-        Voice voice = new Voice(noteList, "voice");
+        Voice voice = new Voice(noteList, "voice", "C");
         assertEquals(36, voice.getDuration());
     }
     
@@ -73,7 +73,7 @@ public class VoiceTest {
         List<Single> noteList = new ArrayList<Single>();
         Single note1 = new Note(new Pitch('C'), 12);
         noteList.add(note1);
-        Voice voice = new Voice(noteList, "voice");
+        Voice voice = new Voice(noteList, "voice", "C");
         assertEquals(12, voice.getDuration());
     }
     
@@ -93,8 +93,8 @@ public class VoiceTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice = new Voice(noteList, "voice");
-        Voice voice2 = new Voice(noteList2, "voice2");
+        Voice voice = new Voice(noteList, "voice", "C");
+        Voice voice2 = new Voice(noteList2, "voice2", "C");
         assertEquals(voice2, voice.transpose(2));
     }
     
@@ -114,8 +114,8 @@ public class VoiceTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice = new Voice(noteList, "voice");
-        Voice voice2 = new Voice(noteList2, "voice2");
+        Voice voice = new Voice(noteList, "voice", "C");
+        Voice voice2 = new Voice(noteList2, "voice2", "C");
         assertEquals(voice2, voice.transpose(-2));
     }
     
@@ -135,8 +135,8 @@ public class VoiceTest {
         noteList2.add(note4);
         noteList2.add(note5);
         noteList2.add(note6);
-        Voice voice = new Voice(noteList, "voice");
-        Voice voice2 = new Voice(noteList2, "voice2");
+        Voice voice = new Voice(noteList, "voice", "C");
+        Voice voice2 = new Voice(noteList2, "voice2", "C");
         assertEquals(voice2, voice.transpose(0));
     }
     
@@ -156,8 +156,8 @@ public class VoiceTest {
         noteList2.add(note4.transpose(Pitch.OCTAVE));
         noteList2.add(note5.transpose(Pitch.OCTAVE));
         noteList2.add(note6.transpose(Pitch.OCTAVE));
-        Voice voice = new Voice(noteList, "voice");
-        Voice voice2 = new Voice(noteList2, "voice2");
+        Voice voice = new Voice(noteList, "voice", "C");
+        Voice voice2 = new Voice(noteList2, "voice2", "C");
         assertEquals(voice2, voice.transpose(14));
     }
     
@@ -177,8 +177,8 @@ public class VoiceTest {
         noteList2.add(note4.transpose(-Pitch.OCTAVE));
         noteList2.add(note5.transpose(-Pitch.OCTAVE));
         noteList2.add(note6.transpose(-Pitch.OCTAVE));
-        Voice voice = new Voice(noteList, "voice");
-        Voice voice2 = new Voice(noteList2, "voice2");
+        Voice voice = new Voice(noteList, "voice", "C");
+        Voice voice2 = new Voice(noteList2, "voice2", "C");
         assertEquals(voice2, voice.transpose(-14));
     }
     

@@ -26,6 +26,7 @@ public class Voice {
 
     private final String name;
     private final List<Single> singles;
+    private final String key;
 
 
 
@@ -45,7 +46,7 @@ public class Voice {
      * @throws IllegalArgumentException if the expression is invalid
      */
   
-    public static List<Single> parseSingles(File file, String name) throws IOException {
+    public static List<Single> parseSingles(File file, String name, String key) throws IOException {
         try {
             //String input = "";
             String input2 = "";
@@ -73,7 +74,7 @@ public class Voice {
             lexer2.reportErrorsAsExceptions();
             parser2.reportErrorsAsExceptions();
             ParseTree tree2 = parser2.abcmusic();
-            GetNoteInfo infoGetter2 = new GetNoteInfo(name);
+            GetNoteInfo infoGetter2 = new GetNoteInfo(name, key);
             new ParseTreeWalker().walk(infoGetter2, tree2);
             return infoGetter2.getSingles();
         } catch(RuntimeException e) {
@@ -86,16 +87,18 @@ public class Voice {
      * @param measures: List of Single objects to be played in the Voice
      * @throws IOException 
      */
-    public Voice(String name, File file) throws IOException{
+    public Voice(String name, File file, String key) throws IOException{
         this.name = name;
-        this.singles = Voice.parseSingles(file, name);
+        this.singles = Voice.parseSingles(file, name, key);
+        this.key = key;
         System.out.println("HELLO" + this.singles.toString());
         checkRep();
     }
     
-    public Voice(List<Single> singles, String name){
+    public Voice(List<Single> singles, String name, String key){
         this.singles = singles;
         this.name = name;
+        this.key = key;
     }
     
     /**
@@ -120,6 +123,14 @@ public class Voice {
     }
     
     /**
+     * Returns the key of the voice
+     * @return String key of the voice
+     */
+    public String getKey(){
+        return this.key;
+    }
+    
+    /**
      * Returns the list of singles to be played in the measure
      * @return List of measures in the Music object
      */
@@ -140,7 +151,7 @@ public class Voice {
             transposedList.add(single.transpose(semitonesUp));
         }
         checkRep();
-        return new Voice(transposedList, this.getName());
+        return new Voice(transposedList, this.getName(), this.getKey());
     }
     
     /**
