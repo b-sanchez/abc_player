@@ -209,7 +209,13 @@ public class Music {
      * time step 10 for half the duration of a beat.
      */
     public void play(){
-        int tempo = 100;
+        int tempo;
+        if(this.infoMap.containsKey("Q")){
+            tempo = Integer.parseInt(this.infoMap.get("Q").split("=")[1]);
+        }
+        else{
+            tempo = 100;
+        }
         if(this.infoMap.containsKey("L")){
             if (this.infoMap.get("L").contains("/")){
                 tempo = tempo / 4;
@@ -221,7 +227,6 @@ public class Music {
         }
         try {
             if(this.infoMap.containsKey("Q")){
-                tempo = Integer.parseInt(this.infoMap.get("Q").split("=")[1]);
                 if (this.infoMap.get("Q").split("=")[0].contains("/")){
                     tempo = tempo * 4;
                     tempo = tempo / Integer.parseInt(this.infoMap.get("Q").split("=")[0].substring(2));
