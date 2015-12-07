@@ -209,8 +209,40 @@ public class Music {
      * time step 10 for half the duration of a beat.
      */
     public void play(){
+        int tempo = 100;
         try {
-            SequencePlayer player = new SequencePlayer(200, 48);
+            if(this.infoMap.containsKey("Q")){
+                tempo = Integer.parseInt(this.infoMap.get("Q").split("=")[1]);
+                if (this.infoMap.get("Q").split("=")[0].contains("/")){
+                    tempo = tempo * 4;
+                    tempo = tempo / Integer.parseInt(this.infoMap.get("Q").split("=")[0].substring(2));
+                }
+                else{
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("Q").split("=")[0]);
+                }
+            }
+            else if(this.infoMap.containsKey("L")){
+                if (this.infoMap.get("L").contains("/")){
+                    tempo = tempo * 4;
+                    tempo = tempo / Integer.parseInt(this.infoMap.get("L").substring(2));
+                }
+                else{
+                    tempo = tempo * Integer.parseInt(this.infoMap.get("L"));
+                } 
+            }
+            else if(this.infoMap.containsKey("M")){
+                if (Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75){
+                    tempo = tempo / 2; 
+                }
+                else{
+                    tempo = tempo / 4;
+                }
+            }
+            else{
+                tempo = tempo / 2;
+            }
+            
+            SequencePlayer player = new SequencePlayer(tempo, 48);
             for (Voice voice: voices){
                 int counter = 0;
                 for(Single single : voice.getSingles()){
