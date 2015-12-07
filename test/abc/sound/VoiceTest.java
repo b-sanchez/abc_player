@@ -30,7 +30,7 @@ public class VoiceTest {
     
     @Test
     public void testInfoGetter() throws IOException {
-        System.out.println(Voice.parseSingles(new File("sample_abc/invention.abc"), "1", "C"));
+        System.out.println(Voice.parseSingles(new File("sample_abc/fur_elise.abc"), "1", "Am"));
     }
     
     @Test

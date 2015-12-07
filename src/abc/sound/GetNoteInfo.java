@@ -641,6 +641,7 @@ public class GetNoteInfo implements NoteGrammarListener {
 
     @Override
     public void enterAbcmusic(AbcmusicContext ctx) { 
+        System.out.println("START " + nameOfVoice);
         if(ctx.abcline(0).getText().charAt(0)=='V') {
             multipleVoices = true;
         }
@@ -678,8 +679,9 @@ public class GetNoteInfo implements NoteGrammarListener {
                 if(notesInElement.size()==1) {
                     singlesInVoice.add(notesInElement.get(0));
                     if(!this.inFirstEnding) {
-                        System.out.println(notesInElement.get(0));
+                        //System.out.println(notesInElement.get(0));
                         this.singlesToRepeat.add(notesInElement.get(0));
+                        System.out.println("ADD" + notesInElement.get(0));
                     }
                 }
                 else {
@@ -690,6 +692,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     singlesInVoice.add(new Chord(notes));
                     if(!this.inFirstEnding) {
                         this.singlesToRepeat.add(new Chord(notes));
+                        System.out.println("ADD" + new Chord(notes));
                     }
                 }
                 notesInElement = new ArrayList<>();
@@ -701,7 +704,9 @@ public class GetNoteInfo implements NoteGrammarListener {
     public void enterNoteorrest(NoteorrestContext ctx) { }
 
     @Override
-    public void exitNoteorrest(NoteorrestContext ctx) { }
+    public void exitNoteorrest(NoteorrestContext ctx) { 
+        System.out.println(ctx.getText());
+    }
 
     @Override
     public void enterOctave(OctaveContext ctx) { }
@@ -745,12 +750,14 @@ public class GetNoteInfo implements NoteGrammarListener {
                 singlesInVoice.add(new Rest(scaleDurationToTuplet(single.getDuration(), ctx)));
                 if(!this.inFirstEnding) {
                     this.singlesToRepeat.add(new Rest(scaleDurationToTuplet(single.getDuration(), ctx)));
+                    System.out.println("ADD" + new Rest(scaleDurationToTuplet(single.getDuration(), ctx)));
                 }
             }
             else if(single.getType().equals("note")) {
                 singlesInVoice.add(new Note(((Note)single).getPitch(), scaleDurationToTuplet(single.getDuration(), ctx)));
                 if(!this.inFirstEnding) {
                     this.singlesToRepeat.add(new Note(((Note)single).getPitch(), scaleDurationToTuplet(single.getDuration(), ctx)));
+                    System.out.println("ADD" + new Note(((Note)single).getPitch(), scaleDurationToTuplet(single.getDuration(), ctx)));
                 }
             }
             else {
@@ -758,6 +765,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     singlesInVoice.add(new Note(((Note)note).getPitch(), scaleDurationToTuplet(note.getDuration(), ctx)));
                     if(!this.inFirstEnding) {
                         this.singlesToRepeat.add(new Note(((Note)note).getPitch(), scaleDurationToTuplet(note.getDuration(), ctx)));
+                        System.out.println("ADD" + new Note(((Note)note).getPitch(), scaleDurationToTuplet(note.getDuration(), ctx)));
                     }
                 }
             }
@@ -944,30 +952,38 @@ public class GetNoteInfo implements NoteGrammarListener {
             }
         }
         
-        if(ctx.getText().equals("|:") || ctx.getText().equals("|]")) {
-            this.singlesToRepeat.clear();
-        }
-        else if(ctx.getText().equals(":|")) {
-            for(Single repeatedSingle: singlesToRepeat) {
-                this.singlesInVoice.add(repeatedSingle);
+        if(nameOfVoice.equals(currentVoiceBeingParsed)) {
+            if(ctx.getText().equals("|:") || ctx.getText().equals("|]")) {
+                this.singlesToRepeat.clear();
+                this.inFirstEnding = false;
             }
-            //this.singlesInVoice.addAll(this.singlesToRepeat);
-            System.out.println(nameOfVoice + " REPEATED NOTES " + this.singlesToRepeat.toString());
-            this.singlesToRepeat.clear();
-            this.inFirstEnding = false;
+            else if(ctx.getText().equals(":|")) {
+                for(Single repeatedSingle: singlesToRepeat) {
+                    this.singlesInVoice.add(repeatedSingle);
+                }
+                //this.singlesInVoice.addAll(this.singlesToRepeat);
+                System.out.println(nameOfVoice + " REPEATED NOTES " + this.singlesToRepeat.toString());
+                this.singlesToRepeat.clear();
+                this.inFirstEnding = false;
+            }
         }
+        System.out.println(ctx.getText());
     }
 
     @Override
-    public void enterNthrepeat(NthrepeatContext ctx) { 
-        if(ctx.DIGIT().getText().equals("1")) {
-            System.out.println("HITTTT");
-            this.inFirstEnding = true;
-        }
-    }
+    public void enterNthrepeat(NthrepeatContext ctx) { }
 
     @Override
-    public void exitNthrepeat(NthrepeatContext ctx) { }
+    public void exitNthrepeat(NthrepeatContext ctx) { 
+        if(nameOfVoice.equals(currentVoiceBeingParsed)) {
+            if(ctx.DIGIT().getText().equals("1")) {
+                System.out.println("HITTTT " + ctx.DIGIT().getText());
+                this.inFirstEnding = true;
+            }
+        }
+        
+        System.out.println(ctx.getText());
+    }
 
     @Override
     public void enterMidtunefield(MidtunefieldContext ctx) { }
