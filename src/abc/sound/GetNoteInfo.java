@@ -581,7 +581,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     mapKey = mapKey1 + ctx.noteorrest().pitch().octave().getText();
                 }
                 if(ctx.noteorrest().pitch().accidental()==null && !this.accidentalMap.containsKey(mapKey)) {
-                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(basenote));
+                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(mapKey1));
                 } 
                 else if(ctx.noteorrest().pitch().accidental()==null){
                     pitchAfterAccidentalParse = basenote.transpose(this.accidentalMap.get(mapKey));
@@ -623,7 +623,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     pitchAfterAccidentalParse = basenote;
                 }
                 else{
-                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(basenote));
+                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(mapKey1));
                 }
                 if(ctx.noteorrest().pitch().octave()==null) {
                     pitchAfterAll = pitchAfterAccidentalParse;
