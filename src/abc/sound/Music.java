@@ -27,7 +27,10 @@ public class Music {
     // Music = List<Voices>
     // Voices = List<Singles>
 
-    
+    private static final int TICKS_PER_BEAT = 48;
+    private static final int DEFAULT_BEAT_LENGTH = 4;
+    private static final int ARBITRARY_PRIME = 17;
+    private static final int DEFAULT_TEMPO = 100;
     private final List<Voice> voices;
     private final Map<String,String> infoMap;
 
@@ -51,9 +54,7 @@ public class Music {
             String input = "";
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
-                if(stop) {
-                }
-                else {
+                if(!stop) {
                     input+= line+'\r'+'\n';
                     if(line.charAt(0)=='K') {
                         stop=true;
@@ -158,7 +159,7 @@ public class Music {
      */
     @Override
     public int hashCode() {
-        return 17;
+        return ARBITRARY_PRIME;
     }
     
     /**
@@ -212,11 +213,11 @@ public class Music {
             tempo = Integer.parseInt(this.infoMap.get("Q").split("=")[1]);
         }
         else{
-            tempo = 100;
+            tempo = DEFAULT_TEMPO;
         }
         if(this.infoMap.containsKey("L")){
             if (this.infoMap.get("L").contains("/")){
-                tempo = tempo / 4;
+                tempo = tempo / DEFAULT_BEAT_LENGTH;
                 tempo = tempo * Integer.parseInt(this.infoMap.get("L").substring(2));
             }
             else{
@@ -226,7 +227,7 @@ public class Music {
         try {
             if(this.infoMap.containsKey("Q")){
                 if (this.infoMap.get("Q").split("=")[0].contains("/")){
-                    tempo = tempo * 4;
+                    tempo = tempo * DEFAULT_BEAT_LENGTH;
                     tempo = tempo / Integer.parseInt(this.infoMap.get("Q").split("=")[0].substring(2));
                 }
                 else{
@@ -235,7 +236,7 @@ public class Music {
             }
             else if(this.infoMap.containsKey("L")){
                 if (this.infoMap.get("L").contains("/")){
-                    tempo = tempo * 4;
+                    tempo = tempo * DEFAULT_BEAT_LENGTH;
                     tempo = tempo / Integer.parseInt(this.infoMap.get("L").substring(2));
                 }
                 else{
@@ -247,14 +248,14 @@ public class Music {
                     tempo = tempo / 2; 
                 }
                 else{
-                    tempo = tempo / 4;
+                    tempo = tempo / DEFAULT_BEAT_LENGTH;
                 }
             }
             else{
                 tempo = tempo / 2;
             }
             
-            SequencePlayer player = new SequencePlayer(tempo, 48);
+            SequencePlayer player = new SequencePlayer(tempo, TICKS_PER_BEAT);
             for (Voice voice: voices){
                 int counter = 0;
                 for(Single single : voice.getSingles()){
@@ -277,11 +278,9 @@ public class Music {
             try {
                 System.in.read();
             } catch (IOException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         } catch (MidiUnavailableException | InvalidMidiDataException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
