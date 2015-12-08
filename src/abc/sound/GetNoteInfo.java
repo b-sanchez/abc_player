@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Stack;
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -46,6 +45,7 @@ public class GetNoteInfo implements NoteGrammarListener {
     private final int TICKS_PER_BEAT = 48;
     private boolean isInTupletElement;
     private Map<String,Integer> accidentalMap = new HashMap<>();
+    private Map<String,Integer> keyMap = new HashMap<>();
     private String key;
     private List<Single> singlesToRepeat;
     boolean inFirstEnding;
@@ -357,152 +357,152 @@ public class GetNoteInfo implements NoteGrammarListener {
         
         if(this.key.equals("C")) {
             for(String basenote: cMajorMap.keySet()) {
-                accidentalMap.put(basenote, cMajorMap.get(basenote));
+                keyMap.put(basenote, cMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Am")) {
             for(String basenote: aMinorMap.keySet()) {
-                accidentalMap.put(basenote, aMinorMap.get(basenote));
+                keyMap.put(basenote, aMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("G")) {
             for(String basenote: gMajorMap.keySet()) {
-                accidentalMap.put(basenote, gMajorMap.get(basenote));
+                keyMap.put(basenote, gMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Em")) {
             for(String basenote: eMinorMap.keySet()) {
-                accidentalMap.put(basenote, eMinorMap.get(basenote));
+                keyMap.put(basenote, eMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("D")) {
             for(String basenote: dMajorMap.keySet()) {
-                accidentalMap.put(basenote, dMajorMap.get(basenote));
+                keyMap.put(basenote, dMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Bm")) {
             for(String basenote: bMinorMap.keySet()) {
-                accidentalMap.put(basenote, bMinorMap.get(basenote));
+                keyMap.put(basenote, bMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("A")) {
             for(String basenote: aMajorMap.keySet()) {
-                accidentalMap.put(basenote, aMajorMap.get(basenote));
+                keyMap.put(basenote, aMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("^Fm")) {
             for(String basenote: fSharpMinorMap.keySet()) {
-                accidentalMap.put(basenote, fSharpMinorMap.get(basenote));
+                keyMap.put(basenote, fSharpMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("E")) {
             for(String basenote: eMajorMap.keySet()) {
-                accidentalMap.put(basenote, eMajorMap.get(basenote));
+                keyMap.put(basenote, eMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("^Cm")) {
             for(String basenote: cSharpMinorMap.keySet()) {
-                accidentalMap.put(basenote, cSharpMinorMap.get(basenote));
+                keyMap.put(basenote, cSharpMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("B")) {
             for(String basenote: bMajorMap.keySet()) {
-                accidentalMap.put(basenote, bMajorMap.get(basenote));
+                keyMap.put(basenote, bMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("^Gm")) {
             for(String basenote: gSharpMinorMap.keySet()) {
-                accidentalMap.put(basenote, gSharpMinorMap.get(basenote));
+                keyMap.put(basenote, gSharpMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("^F")) {
             for(String basenote: fSharpMajorMap.keySet()) {
-                accidentalMap.put(basenote, fSharpMajorMap.get(basenote));
+                keyMap.put(basenote, fSharpMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("^Dm")) {
             for(String basenote: dSharpMinorMap.keySet()) {
-                accidentalMap.put(basenote, dSharpMinorMap.get(basenote));
+                keyMap.put(basenote, dSharpMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("^C")) {
             for(String basenote: cSharpMajorMap.keySet()) {
-                accidentalMap.put(basenote, cSharpMajorMap.get(basenote));
+                keyMap.put(basenote, cSharpMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("^Am")) {
             for(String basenote: aSharpMinorMap.keySet()) {
-                accidentalMap.put(basenote, aSharpMinorMap.get(basenote));
+                keyMap.put(basenote, aSharpMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("F")) {
             for(String basenote: fMajorMap.keySet()) {
-                accidentalMap.put(basenote, fMajorMap.get(basenote));
+                keyMap.put(basenote, fMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Dm")) {
             for(String basenote: dMinorMap.keySet()) {
-                accidentalMap.put(basenote, dMinorMap.get(basenote));
+                keyMap.put(basenote, dMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_B")) {
             for(String basenote: bFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, bFlatMajorMap.get(basenote));
+                keyMap.put(basenote, bFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Gm")) {
             for(String basenote: gMinorMap.keySet()) {
-                accidentalMap.put(basenote, gMinorMap.get(basenote));
+                keyMap.put(basenote, gMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_E")) {
             for(String basenote: eFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, eFlatMajorMap.get(basenote));
+                keyMap.put(basenote, eFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Cm")) {
             for(String basenote: cMinorMap.keySet()) {
-                accidentalMap.put(basenote, cMinorMap.get(basenote));
+                keyMap.put(basenote, cMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_A")) {
             for(String basenote: aFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, aFlatMajorMap.get(basenote));
+                keyMap.put(basenote, aFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("Fm")) {
             for(String basenote: fMinorMap.keySet()) {
-                accidentalMap.put(basenote, fMinorMap.get(basenote));
+                keyMap.put(basenote, fMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_D")) {
             for(String basenote: dFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, dFlatMajorMap.get(basenote));
+                keyMap.put(basenote, dFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("_Bm")) {
             for(String basenote: bFlatMinorMap.keySet()) {
-                accidentalMap.put(basenote, bFlatMinorMap.get(basenote));
+                keyMap.put(basenote, bFlatMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_G")) {
             for(String basenote: gFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, gFlatMajorMap.get(basenote));
+                keyMap.put(basenote, gFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("_Em")) {
             for(String basenote: eFlatMinorMap.keySet()) {
-                accidentalMap.put(basenote, eFlatMinorMap.get(basenote));
+                keyMap.put(basenote, eFlatMinorMap.get(basenote));
             }
         }
         else if(this.key.equals("_C")) {
             for(String basenote: cFlatMajorMap.keySet()) {
-                accidentalMap.put(basenote, cFlatMajorMap.get(basenote));
+                keyMap.put(basenote, cFlatMajorMap.get(basenote));
             }
         }
         else if(this.key.equals("_Am")) {
             for(String basenote: aFlatMinorMap.keySet()) {
-                accidentalMap.put(basenote, aFlatMinorMap.get(basenote));
+                keyMap.put(basenote, aFlatMinorMap.get(basenote));
             }
         }
     }
@@ -580,7 +580,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                     mapKey = mapKey1 + ctx.noteorrest().pitch().octave().getText();
                 }
                 if(ctx.noteorrest().pitch().accidental()==null && !this.accidentalMap.containsKey(mapKey)) {
-                    pitchAfterAccidentalParse = basenote;
+                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(basenote));
                 } 
                 else if(ctx.noteorrest().pitch().accidental()==null){
                     pitchAfterAccidentalParse = basenote.transpose(this.accidentalMap.get(mapKey));
@@ -618,8 +618,11 @@ public class GetNoteInfo implements NoteGrammarListener {
                 else if (this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==2){
                     pitchAfterAccidentalParse = basenote.transpose(2);
                 }
-                else{
+                else if (this.accidentalMap.containsKey(mapKey) && this.accidentalMap.get(mapKey)==0){
                     pitchAfterAccidentalParse = basenote;
+                }
+                else{
+                    pitchAfterAccidentalParse = basenote.transpose(this.keyMap.get(basenote));
                 }
                 if(ctx.noteorrest().pitch().octave()==null) {
                     pitchAfterAll = pitchAfterAccidentalParse;
@@ -801,7 +804,8 @@ public class GetNoteInfo implements NoteGrammarListener {
 
     @Override
     public void exitBarline(BarlineContext ctx) { 
-        if(this.key.equals("C")) {
+        accidentalMap.clear();
+        /*if(this.key.equals("C")) {
             for(String basenote: cMajorMap.keySet()) {
                 accidentalMap.put(basenote, cMajorMap.get(basenote));
             }
@@ -950,7 +954,7 @@ public class GetNoteInfo implements NoteGrammarListener {
             for(String basenote: aFlatMinorMap.keySet()) {
                 accidentalMap.put(basenote, aFlatMinorMap.get(basenote));
             }
-        }
+        }*/
         
         if(nameOfVoice.equals(currentVoiceBeingParsed)) {
             if(ctx.getText().equals("|:") || ctx.getText().equals("|]")) {
