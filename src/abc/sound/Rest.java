@@ -2,6 +2,7 @@ package abc.sound;
 
 public class Rest implements Single {
     
+    private static final int ARBITRARY_PRIME = 17;
     private final int duration;
  
     //Rep Invariant:
@@ -45,7 +46,7 @@ public class Rest implements Single {
     
     @Override
     public int hashCode() {
-        return 17;
+        return ARBITRARY_PRIME;
     }
     
     @Override

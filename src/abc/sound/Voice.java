@@ -23,7 +23,7 @@ import abc.parser.NoteGrammarParser;
 
 public class Voice {
     
-
+    private static final int ARBITRARY_PRIME = 17;
     private final String name;
     private final List<Single> singles;
     private final String key;
@@ -48,7 +48,6 @@ public class Voice {
   
     public static List<Single> parseSingles(File file, String name, String key) throws IOException {
         try {
-            //String input = "";
             String input2 = "";
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
@@ -58,7 +57,6 @@ public class Voice {
                     }
                 }
                 else {
-                    //input+= line+'\r'+'\n';
                     if(line.charAt(0)=='K') {
                         stop=true;
                     }
@@ -175,7 +173,7 @@ public class Voice {
      */
     @Override
     public int hashCode() {
-        return 17;
+        return ARBITRARY_PRIME;
     }
     
     /**
@@ -209,37 +207,5 @@ public class Voice {
         assert this.getDuration() > 0;
     }
     
-    /**
-     * Plays the Singles in this Voice object sequentially
-     */
-    public SequencePlayer play(){
-        try {
-            SequencePlayer player = new SequencePlayer(200, 48);
-            int counter = 0;
-            for(Single single : singles){
-                if (single.getType().equals("note")){
-                    player.addNote(((Note) single).getPitch().toMidiNote(), counter, single.getDuration());
-                }
-                else if (single.getType().equals("rest")){
-                    player.addNote(0, counter, single.getDuration());
-                }
-                else{
-                    for (Note note: ((Chord) single).getNotes()){
-                        player.addNote(note.getPitch().toMidiNote(), counter, note.getDuration());
-                    }
-                }
-                counter += single.getDuration();
-            }
-            return player;
-        } catch (MidiUnavailableException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvalidMidiDataException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        return null;
-
-    }
     
 }

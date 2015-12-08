@@ -7,6 +7,7 @@ import java.util.Set;
 
 public class Chord implements Single {
     
+    private static final int ARBITRARY_PRIME = 17;
     private final Set<Note> notes;
     
     //Rep Invariant:
@@ -76,7 +77,7 @@ public class Chord implements Single {
 
     @Override
     public int hashCode() {
-        return 17;
+        return ARBITRARY_PRIME;
     }
     
 

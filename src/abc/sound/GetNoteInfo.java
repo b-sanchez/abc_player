@@ -547,7 +547,7 @@ public class GetNoteInfo implements NoteGrammarListener {
                 duration = TICKS_PER_BEAT;
             }
             else if(ctx.notelength().getText().equals("/")) {
-                duration = 24;
+                duration = TICKS_PER_BEAT/2;
             }
             else if(ctx.notelength().getText().charAt(0)=='/') {
                 duration = TICKS_PER_BEAT/Integer.parseInt(ctx.notelength().getText().substring(1));
