@@ -1,9 +1,5 @@
 package abc.sound;
 
-
-
-
-
 import java.io.IOException;
 
 
@@ -16,6 +12,7 @@ public class SequencePlayerTest {
 
     // Each test will go through and play each song. 
     
+    //Row, row, row your boat 
     @Test
     public void testPiece1() {
         try {
@@ -78,7 +75,7 @@ public class SequencePlayerTest {
         }
     }
     
-    
+    //Mario Song
     @Test
     public void testPiece2() {
         try {

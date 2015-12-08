@@ -26,7 +26,7 @@ public class NoteTest {
         assertEquals(note.getPitch(), new Pitch('E').transpose(Pitch.OCTAVE));
     }
     
-    //1 octave up
+    //1 octave down
     @Test
     public void testGetPitchLowDFlat(){
         Note note = new Note(new Pitch('D').transpose(-Pitch.OCTAVE-1) ,10);

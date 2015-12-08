@@ -49,11 +49,9 @@ public class Music {
     public static Map<String,String> parseInfo(File file) throws IOException {
         try {
             String input = "";
-            String input2 = "";
             boolean stop = false;
             for(String line: Files.readAllLines(file.toPath())) {
                 if(stop) {
-                    input2+=line+'\r'+'\n';
                 }
                 else {
                     input+= line+'\r'+'\n';
