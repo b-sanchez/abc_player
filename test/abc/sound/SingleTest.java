@@ -11,8 +11,8 @@ public class SingleTest {
     
     //TESTING STRATEGY:
     
-    //Types to test: Note and Rest
-    //Methods to test: getType, getDuration, transpose, toString
+    //Types to test: Note, Rest, Chord
+    //Methods to test: getType, getDuration, transpose
     
     //getType():
     //-Note/Rest/Chord
@@ -26,8 +26,6 @@ public class SingleTest {
     //-Within 0, 1, 2+ octaves
     //-semitonesUp = negative/positive
     
-    //toString():
-    //-Note, Rest, Chord
     
     //getType: Note
     @Test

@@ -10,15 +10,15 @@ public class Note implements Single {
     //Rep Invariant:
     //-this.duration > 0
     //Abstraction Function AF(value):
-    //-represents a note in a piece of music that has a defined pitch and duration
+    //-represents a note in a piece of music that has a defined pitch and duration represented as pitch and duration
     //Safety from Rep Exposure:
     //-pitch is a Pitch (immutable) that is private/final 
-    //-duration is private/final, not explicitly passed
+    //-duration is immutable, private/final
     
     /**
      * Constructor for a Single that is a note
-     * @param pitch: a Pitch object representing the Single's pitch
-     * @param duration: an integer length for the note to be played
+     * @param pitch a Pitch object representing the Note's pitch
+     * @param duration an integer length for the note to be played
      */
     public Note(Pitch pitch, int duration){
         this.pitch = pitch;

@@ -14,10 +14,10 @@ public class Chord implements Single {
     //-this.getDuration() > 0
     //-notes is non-empty
     //Abstraction Function AF(value):
-    //-represents a chord to be played in a piece of music that contains a set of notes (each of which as a pitch and duration)
+    //-represents a chord to be played in a piece of music that contains a set of notes represented by notes (each of which as a pitch and duration)
     //Safety from Rep Exposure:
     //-notes is Set of immutable Note objects.
-    //-notes is final/private, and isn't passed between classes
+    //-notes is final/private, and isn't passed between classes in any mutable form
     
     /**
      * Constructor for Chord object
@@ -44,7 +44,6 @@ public class Chord implements Single {
      * @return Set of Notes in the chord
      */
     public Set<Note> getNotes(){
-        checkRep();
         //Immutability
         return Collections.unmodifiableSet(this.notes);
     }
@@ -104,6 +103,7 @@ public class Chord implements Single {
      */
     private void checkRep(){
         assert this.getDuration() > 0;
+        assert this.getNotes().size() > 0;
     }
     
 

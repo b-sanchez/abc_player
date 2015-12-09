@@ -38,14 +38,15 @@ public class Music {
     //-this.getDuration() > 0
     //-duration of all Voice objects in voices are the same
     //Abstraction Function AF(value):
-    //-represents a piece of music that contains voices to be played
+    //-represents a piece of music that contains voices to be played represented as voices
     //Safety from Rep Exposure:
-    //-voices is List of immutable Voice objects, which contains immutable Singles, and is private and final (not passed between classes)
+    //-voices is List of immutable Voice objects, which contains immutable Singles, and is private and final and not passed in any mutable form
+    //-
     
     /**
      * Parse a Music.
-     * @param input expression to parse, as defined in the PS3 handout.
-     * @return expression AST for the input
+     * @param file abc file to parse
+     * @return a map of all the heading info given by the abc file
      * @throws IOException 
      * @throws IllegalArgumentException if the expression is invalid
      */
@@ -80,25 +81,31 @@ public class Music {
     
     /**
      * Constructor for Music object
-     * @param measures: List of Single objects to be played in the Music
+     * @param voices list of Voice objects to be played in the Music
      */
     public Music(List<Voice> voices){
         this.voices = voices;
         this.infoMap = new HashMap<String,String>();
+        checkRep();
     }
     
+    /**
+     * Constructor for Music object
+     * @param file abc file to be played in the Music
+     */
     public Music(File file) throws IOException {
         this.infoMap = Music.parseInfo(file);
         List<Voice> voices = new ArrayList<>();
         for(String thing: this.infoMap.keySet()) {
             if(thing.charAt(0)=='V') {
-                voices.add(new Voice(infoMap.get(thing), file, this.infoMap.get("K")));
+                voices.add(new Voice(file, infoMap.get(thing), this.infoMap.get("K")));
             }
         }
         if(voices.isEmpty()) {
-            voices.add(new Voice("only", file, this.infoMap.get("K")));
+            voices.add(new Voice(file, "only", this.infoMap.get("K")));
         }
         this.voices =  voices;
+        checkRep();
     }
     
     /**
@@ -112,8 +119,8 @@ public class Music {
     }
     
     /**
-     * Returns the list of singles to be played in the measure
-     * @return List of measures in the Music object
+     * Returns the list of voices to be played in the music
+     * @return List of voices in the Music object
      */
     public List<Voice> getVoices(){
         checkRep();
@@ -121,9 +128,9 @@ public class Music {
     }
     
     /**
-     * Transposes the singles (chord, note, or rest) in a piece up by a certain number of semitones
-     * @param semitonesUp: integer number of semitones to transpose each single up 
-     * @return the piece of Music whose singles are transposed up by given number of semitones
+     * Transposes the Music up by a certain number of semitones
+     * @param semitonesUp integer number of semitones to transpose each single up, can be negative
+     * @return the piece of Music that is transposed up by given number of semitones
      */
     public Music transpose(int semitonesUp) {
         checkRep();
@@ -150,20 +157,12 @@ public class Music {
         return piece.toString();
     }
     
-    /**
-     * Returns integer hashCode for the piece of Music according to the Object contract
-     * @return int hashCode for the piece of Music (two equivalent pieces of Music have the same hashcode)
-     */
     @Override
     public int hashCode() {
         return ARBITRARY_PRIME;
     }
     
-    /**
-     * Determines equality of two Music  objects by checking for structural equality
-     * @param that: Object to compare this Music with
-     * @return true if two Music objects are identical 
-     */
+    @Override
     public boolean equals(Object obj) {
         if(obj instanceof Music){
             Music that = (Music) obj;
@@ -182,9 +181,6 @@ public class Music {
         return false;
     }
     
-    /**
-     * Assert the Rep Invariant
-     */
     private void checkRep(){
         //-this.getDuration() > 0
         assert this.getDuration() > 0;
@@ -199,10 +195,6 @@ public class Music {
     
     /**
      * Plays the Music piece.
-     * addNote(base, tick, duration) schedules a note with pitch value 'base'
-     * starting at 'tick' to be played for 'duration' number of ticks. For example,
-     * addNote(new Pitch('C').toMidiNote(), 10, 1) plays the middle C at
-     * time step 10 for half the duration of a beat.
      */
     public void play(){
         int tempo;
@@ -220,6 +212,14 @@ public class Music {
             else{
                 tempo = tempo / Integer.parseInt(this.infoMap.get("L"));
             } 
+        }
+        else if(this.infoMap.containsKey("M")){
+            if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
+                tempo = tempo * 2;
+            }
+            else{
+                tempo = tempo * 4; 
+            }
         }
         try {
             if(this.infoMap.containsKey("Q")){
@@ -241,16 +241,14 @@ public class Music {
                 } 
             }
             else if(this.infoMap.containsKey("M")){
-                if (Integer.parseInt(this.infoMap.get("M").substring(0,1)) / Integer.parseInt(this.infoMap.get("M").substring(2,3)) >= .75){
-                    tempo = tempo / 2; 
+                if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
+                    tempo = tempo / 2;
                 }
                 else{
-                    tempo = tempo / DEFAULT_BEAT_LENGTH;
+                    tempo = tempo / 4; 
                 }
             }
-            else{
-                tempo = tempo / 2;
-            }
+            
             
             SequencePlayer player = new SequencePlayer(tempo, TICKS_PER_BEAT);
             for (Voice voice: voices){
@@ -270,7 +268,7 @@ public class Music {
                     counter += single.getDuration();
                 }
             }
-            //System.out.println(player);
+            checkRep();
             player.play();
             try {
                 System.in.read();

@@ -30,15 +30,16 @@ public class Voice {
     //Rep Invariant:
     //-this.getDuration() > 0
     //Abstraction Function AF(value):
-    //-represents a voice that contains singles (Rests, Notes, Chords) to be played
-    //-infoMap maps the header information of an abc file 
+    //-represents a voice that contains singles (Rests, Notes, Chords) to be played represented by singles
     //Safety from Rep Exposure:
-    //-singles is List of an immutable type Single, and is private and final (not passed between classes)
+    //-singles is List of an immutable type Single, and is private and final and not passed in any mutable form)
     
     /**
      * Parse a Voice as a list of Singles.
-     * @param input expression to parse, as defined in the PS3 handout.
-     * @return expression AST for the input
+     * @param file abc file to parse
+     * @param name the name of the voice
+     * @param key the key that the voice should be played in
+     * @return List of Singles representing the voice
      * @throws IOException 
      * @throws IllegalArgumentException if the expression is invalid
      */
@@ -78,25 +79,34 @@ public class Voice {
    
     /**
      * Constructor for Voice object
-     * @param measures: List of Single objects to be played in the Voice
+     * @param file the abc file that the voice comes from 
+     * @param name the name of the voice
+     * @param key the key the voice should be played in
      * @throws IOException 
      */
-    public Voice(String name, File file, String key) throws IOException{
+    public Voice( File file, String name, String key) throws IOException{
         this.name = name;
         this.singles = Voice.parseSingles(file, name, key);
         this.key = key;
         checkRep();
     }
     
+    /**
+     * Constructor for Voice object
+     * @param singles List of Single objects to be played in the Voice
+     * @param name the name of the voice
+     * @param key the key that the voice should be played in
+     */
     public Voice(List<Single> singles, String name, String key){
         this.singles = singles;
         this.name = name;
         this.key = key;
+        checkRep();
     }
     
     /**
      * Returns the time duration of the voice to be played
-     * @return int duration of piece
+     * @return int duration of the voice
      */
     public int getDuration() {
         //Duration of voice is the sum of all of the durations of the singles in it
@@ -124,8 +134,8 @@ public class Voice {
     }
     
     /**
-     * Returns the list of singles to be played in the measure
-     * @return List of measures in the Music object
+     * Returns the list of singles to be played in the Voice
+     * @return List of Singles in the Voice object
      */
     public List<Single> getSingles(){
         checkRep();
@@ -133,9 +143,9 @@ public class Voice {
     }
     
     /**
-     * Transposes the singles (chord, note, or rest) in a voice up by a certain number of semitones
-     * @param semitonesUp: integer number of semitones to transpose each single up 
-     * @return the Voice whose singles are transposed up by given number of semitones
+     * Transposes the voice up by a certain number of semitones
+     * @param semitonesUp integer number of semitones to transpose each single up, can be negative 
+     * @return a Voice transposed up by the given number of semitones
      */
     public Voice transpose(int semitonesUp) {
         checkRep();
@@ -162,20 +172,12 @@ public class Voice {
         return piece.toString();
     }
     
-    /**
-     * Returns integer hashCode for the piece of Music according to the Object contract
-     * @return int hashCode for the piece of Music (two equivalent pieces of Music have the same hashcode)
-     */
     @Override
     public int hashCode() {
         return ARBITRARY_PRIME;
     }
     
-    /**
-     * Determines equality of two Music  objects by checking for structural equality
-     * @param that: Object to compare this Music with
-     * @return true if two Music objects are identical 
-     */
+    @Override
     public boolean equals(Object obj) {
         if(obj instanceof Voice){
             Voice that = (Voice) obj;
@@ -195,9 +197,6 @@ public class Voice {
         return false;
     }
     
-    /**
-     * Assert the Rep Invariant
-     */
     private void checkRep(){
         assert this.getDuration() > 0;
     }

@@ -12,7 +12,7 @@ import org.junit.Test;
 public class VoiceTest {
     
     //TESTING STRATEGY:
-    //Methods to test: getSingles, getDuration, transpose, toString
+    //Methods to test: getSingles, getDuration, transpose, parseSingles
     
     //getSingles():
     //-1, 2+ Singles
@@ -25,11 +25,9 @@ public class VoiceTest {
     //-Within 0, 1, 2+ octaves
     //-semitonesUp = negative/positive
     
-    //toString():
-    //-1, 2+ Singles
     
     @Test
-    public void testInfoGetter() throws IOException {
+    public void testSingleGetter() throws IOException {
         System.out.println(Voice.parseSingles(new File("sample_abc/fur_elise.abc"), "1", "Am"));
     }
     

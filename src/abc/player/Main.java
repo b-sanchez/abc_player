@@ -33,7 +33,7 @@ public class Main {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        play("sample_abc/fur_elise.abc");
+        //play("sample_abc/fur_elise.abc");
         //play("sample_abc/piece1.abc");
         //play("sample_abc/piece2.abc");
         //play("sample_abc/abc_song.abc");
@@ -43,7 +43,7 @@ public class Main {
         //play("sample_abc/prelude.abc");
         //play("sample_abc/sample1.abc");
         //play("sample_abc/sample2.abc");
-        //play("sample_abc/sample3.abc");
+        play("sample_abc/sample3.abc");
         //play("sample_abc/scale.abc");
         //play("sample_abc/waxies_dargle.abc");
     }

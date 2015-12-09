@@ -10,7 +10,7 @@ public class NoteTest {
     //Methods to test: getPitch()
     
     //getPitch()
-    //a note -1/0/1 octave up
+    //a note transposed down, up, and not at all
     
     //0 octaves up
     @Test

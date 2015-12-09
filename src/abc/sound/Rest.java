@@ -8,9 +8,9 @@ public class Rest implements Single {
     //Rep Invariant:
     //-this.duration > 0
     //Abstraction Function AF(value):
-    //-represents a rest in the music piece that has a specified duration
+    //-represents a rest in the music piece that has a specified duration represented by duration
     //Safety from Rep Exposure:
-    //-duration is private and final (isn't passed between classes)
+    //-duration is private and final and immutable
     
     /**
      * Constructor for a Single that is a rest

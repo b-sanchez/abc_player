@@ -12,7 +12,7 @@ import org.junit.Test;
 public class MusicTest {
     
     //TESTING STRATEGY:
-    //Methods to test: getVoices, getDuration, transpose, toString
+    //Methods to test: getVoices, getDuration, transpose, play
     
     //getVoices():
     //-1, 2+ Voices
@@ -24,9 +24,6 @@ public class MusicTest {
     //transpose():
     //-Within 0, 1, 2+ octaves
     //-semitonesUp = negative/positive
-    
-    //toString():
-    //-1, 2+ Singles
     
     //play():
     //-Single voice, multiple voices
