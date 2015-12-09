@@ -23,6 +23,7 @@ public class Main {
     public static void play(String file) throws IOException {
         //Create a Music object from the file name and call its play method
         Music music = new Music(new File(file));
+        //System.out.println(music.);
         music.play();
     }
 

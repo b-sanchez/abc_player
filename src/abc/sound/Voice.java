@@ -61,7 +61,6 @@ public class Voice {
             }
             String input3 = input2.replaceAll(" ","!");
             String input4 = input3.replaceAll("\t","!");
-            System.out.println(input4);
             CharStream stream2 = new ANTLRInputStream(input4);
             NoteGrammarLexer lexer2 = new NoteGrammarLexer(stream2);
             TokenStream tokens2 = new CommonTokenStream(lexer2);
@@ -86,7 +85,6 @@ public class Voice {
         this.name = name;
         this.singles = Voice.parseSingles(file, name, key);
         this.key = key;
-        System.out.println("HELLO" + this.singles.toString());
         checkRep();
     }
     

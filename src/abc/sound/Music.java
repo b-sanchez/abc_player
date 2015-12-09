@@ -61,7 +61,7 @@ public class Music {
                     }
                 }
             }
-            System.out.println(input);
+            System.out.println(input); //print heading to console
             CharStream stream = new ANTLRInputStream(input);
             HeadingGrammarLexer lexer = new HeadingGrammarLexer(stream);
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -99,9 +99,6 @@ public class Music {
             voices.add(new Voice("only", file, this.infoMap.get("K")));
         }
         this.voices =  voices;
-        for(Voice voice: this.voices) {
-            System.out.println("LOOK AT ME " + voice.getName().toString());
-        }
     }
     
     /**
@@ -273,7 +270,7 @@ public class Music {
                     counter += single.getDuration();
                 }
             }
-            System.out.println(player);
+            //System.out.println(player);
             player.play();
             try {
                 System.in.read();
