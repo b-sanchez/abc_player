@@ -1,7 +1,9 @@
 package abc.player;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import abc.sound.Music;
 
@@ -27,11 +29,22 @@ public class Main {
     }
 
     /**
-     * Call play method to play songs
-     * @param args
+     * Read inputed file path from the console and play the corresponding abc file
+     * @param args unused
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+        final BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        while (true) {
+            final String fileText = in.readLine();
+            
+            if (fileText.isEmpty()) {
+                return; // exits the program
+            }
+            
+            play(fileText);
+        }
+            
         //play("sample_abc/fur_elise.abc");
         //play("sample_abc/piece1.abc");
         //play("sample_abc/piece2.abc");
@@ -42,7 +55,7 @@ public class Main {
         //play("sample_abc/prelude.abc");
         //play("sample_abc/sample1.abc");
         //play("sample_abc/sample2.abc");
-        play("sample_abc/sample3.abc");
+        //play("sample_abc/sample3.abc");
         //play("sample_abc/scale.abc");
         //play("sample_abc/waxies_dargle.abc");
     }
