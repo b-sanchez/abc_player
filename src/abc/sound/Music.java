@@ -53,7 +53,11 @@ public class Music {
     public static Map<String,String> parseInfo(File file) throws IOException {
         try {
             String input = "";
+            String input2 = "";
             boolean stop = false;
+            List<String> voicesInMap = new ArrayList<>();
+            int numVoices = 0;
+            Map<String, String> otherVoiceMap = new HashMap<>();
             for(String line: Files.readAllLines(file.toPath())) {
                 if(!stop) {
                     input+= line+'\r'+'\n';
@@ -61,8 +65,17 @@ public class Music {
                         stop=true;
                     }
                 }
+                else {
+                    input2 += line+'\r'+'\n';
+                }
+                String newLine = line.replaceAll("\\s+", "");
+                if(newLine.length()>=3 && !voicesInMap.contains(newLine.substring(2)) && newLine.charAt(0)=='V') {
+                    voicesInMap.add(newLine.substring(2));
+                    otherVoiceMap.put("V"+numVoices,newLine.substring(2));
+                    numVoices++;
+                }
             }
-            System.out.println(input); //print heading to console
+            System.out.println(input);
             CharStream stream = new ANTLRInputStream(input);
             HeadingGrammarLexer lexer = new HeadingGrammarLexer(stream);
             TokenStream tokens = new CommonTokenStream(lexer);
@@ -72,7 +85,13 @@ public class Music {
             ParseTree tree = parser.root();
             GetHeadingInfo infoGetter = new GetHeadingInfo();
             new ParseTreeWalker().walk(infoGetter, tree);
-            return infoGetter.getInfoMap();
+            Map<String, String> preVoiceMap = infoGetter.getInfoMap();
+            for(String voice: otherVoiceMap.keySet()) {
+                if(!preVoiceMap.containsKey(otherVoiceMap)) {
+                    preVoiceMap.put(voice, otherVoiceMap.get(voice));
+                }
+            }
+            return preVoiceMap;
         } catch(RuntimeException e) {
             throw new IllegalArgumentException();
         }

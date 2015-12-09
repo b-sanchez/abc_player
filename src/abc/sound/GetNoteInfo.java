@@ -652,8 +652,6 @@ public class GetNoteInfo implements NoteGrammarListener {
             currentVoiceBeingParsed = "only";
         }
         isInTupletElement = false;
-        
-       
     }
 
     @Override

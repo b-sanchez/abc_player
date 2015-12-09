@@ -22,6 +22,7 @@ import abc.parser.HeadingGrammarParser.VoiceContext;
 
 public class GetHeadingInfo implements HeadingGrammarListener {
     private Stack<Map<String, String>> stack = new Stack<>();
+    private boolean inHeader = true;
     
     public Map<String,String> getInfoMap() {
         return stack.get(0);
@@ -73,22 +74,7 @@ public class GetHeadingInfo implements HeadingGrammarListener {
     public void enterVoice(VoiceContext ctx) { }
 
     @Override
-    public void exitVoice(VoiceContext ctx) { 
-        Map<String,String> map = stack.pop();
-        int numVoices = 0;
-        for(String key: map.keySet()) {
-            if(key.charAt(0)=='V') {
-                numVoices++;
-            }
-        }
-        if(ctx.ANYTHING()!=null) {
-            map.put("V" + numVoices, ctx.ANYTHING().getText());
-        }
-        else {
-            map.put("V" + numVoices, ctx.NUMBER().getText());
-        }
-        stack.push(map);
-    }
+    public void exitVoice(VoiceContext ctx) { }
 
     @Override
     public void enterMeter(MeterContext ctx) { }
