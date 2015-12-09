@@ -233,7 +233,10 @@ public class Music {
             } 
         }
         else if(this.infoMap.containsKey("M")){
-            if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
+            if (this.infoMap.get("M").contains("C")){
+                tempo = tempo * 2;
+            }
+            else if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
                 tempo = tempo * 2;
             }
             else{
@@ -260,7 +263,10 @@ public class Music {
                 } 
             }
             else if(this.infoMap.containsKey("M")){
-                if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
+                if (this.infoMap.get("M").contains("C")){
+                    tempo = tempo / 2;
+                }
+                else if (Double.parseDouble(this.infoMap.get("M").split("/")[0])/Double.parseDouble(this.infoMap.get("M").split("/")[1]) >= .75){
                     tempo = tempo / 2;
                 }
                 else{
