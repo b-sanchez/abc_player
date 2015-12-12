@@ -1,3 +1,13 @@
-Run Main and type the file name into the console to play the abc file associated with it.
+Authors:
+Brandon Sanchez
+Eric LaCava
+Pranam Chatterjee
 
+Source files provided by MIT 6.005 are noted in a comment at the top of relevant files.
+
+This program uses abc files, a type of music file which is formatted a certain way.  The program parses these files
+and then uses abstract data types and Java MIDI to play the music.
+
+Run Main and type the file name into the console to play the abc file associated with it.
+e.g: sample_abc/fur_elise.abc
 Restart the Main method before you play the next piece.
